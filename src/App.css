@@ -33,6 +33,12 @@ textarea {
   font-family: "Poppins", sans-serif;
 }
 
+button {
+  outline: none;
+  border: none;
+  background: none;
+}
+
 a {
   text-decoration: none;
 }
@@ -41,9 +47,32 @@ ul {
   list-style: none;
 }
 
+img {
+  width: 100%;
+}
+
 .container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+.primary-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: var(--font-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-dark);
+  transition: all 0.25s ease-in-out;
 }
