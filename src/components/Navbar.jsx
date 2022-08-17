@@ -4,7 +4,7 @@ import accentLogo from "../images/accent text logo.png";
 import profileImg from "../images/profile1.jpg";
 import { AiFillHome } from "react-icons/ai";
 import {
-  FaBookmark,
+  // FaBookmark,
   FaSearch,
   FaUser,
   FaPlus,
