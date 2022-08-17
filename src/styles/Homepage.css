@@ -1,0 +1,49 @@
+.home {
+  width: 100%;
+  background-color: var(--background);
+}
+
+.home__container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 16rem auto;
+  gap: 2rem;
+  padding-top: 2rem;
+}
+/* Home Profile Section */
+
+/* Home Feed Section */
+.home__feed--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.home__feed--welcomeMsg {
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--font-color);
+}
+
+.home__feed--welcomeMsg span {
+  color: var(--primary);
+}
+
+.home__feed--links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home__feed--link {
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.25s ease-in-out;
+}
+
+.home__feed--link:hover {
+  color: var(--primary);
+  transition: all 0.25s ease-in-out;
+}
