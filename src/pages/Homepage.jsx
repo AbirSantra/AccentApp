@@ -1,4 +1,5 @@
 import React from "react";
+import ProfileCard from "../components/ProfileCard";
 import "../styles/Homepage.css";
 
 const Homepage = () => {
@@ -6,7 +7,9 @@ const Homepage = () => {
     <div className="home">
       <div className="container home__container">
         {/* Profile Section */}
-        <div className="home__profile--section">Profile</div>
+        <div className="home__profile--section">
+          <ProfileCard />
+        </div>
         {/* Feed Section */}
         <div className="home__feed--section">
           <div className="home__feed--header">
