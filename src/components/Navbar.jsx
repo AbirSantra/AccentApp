@@ -6,9 +6,9 @@ import { AiFillHome } from "react-icons/ai";
 import {
   FaBookmark,
   FaSearch,
-  FaShoppingCart,
   FaUser,
   FaPlus,
+  FaShoppingBag,
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -29,19 +29,20 @@ const Navbar = () => {
             </span>
           </a>
           <a href="/" className="navbar__navlink">
-            <FaBookmark />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Saves</p>
-            </span>
-          </a>
-          <a href="/" className="navbar__navlink">
             <FaSearch />
             <span className="tooltipcard">
               <p className="tooltiptext">Search</p>
             </span>
           </a>
           <a href="/" className="navbar__navlink">
-            <FaShoppingCart size={26} />
+            <FaBookmark />
+            <span className="tooltipcard">
+              <p className="tooltiptext">Saves</p>
+            </span>
+          </a>
+
+          <a href="/" className="navbar__navlink">
+            <FaShoppingBag />
             <span className="tooltipcard">
               <p className="tooltiptext">Marketplace</p>
             </span>
