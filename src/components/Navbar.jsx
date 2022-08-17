@@ -36,7 +36,7 @@ const Navbar = () => {
             </span>
           </a>
           <a href="/" className="navbar__navlink">
-            <FaStar />
+            <FaStar size={26} />
             <span className="tooltipcard">
               <p className="tooltiptext">Saves</p>
             </span>
