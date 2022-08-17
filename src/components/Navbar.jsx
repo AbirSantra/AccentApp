@@ -9,6 +9,7 @@ import {
   FaUser,
   FaPlus,
   FaShoppingBag,
+  FaStar,
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -35,7 +36,7 @@ const Navbar = () => {
             </span>
           </a>
           <a href="/" className="navbar__navlink">
-            <FaBookmark />
+            <FaStar />
             <span className="tooltipcard">
               <p className="tooltiptext">Saves</p>
             </span>
