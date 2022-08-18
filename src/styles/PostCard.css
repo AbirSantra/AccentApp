@@ -1,0 +1,60 @@
+.postcard__container {
+  width: 100%;
+  background-color: var(--background-light);
+  padding: 0.8rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.post__image {
+  overflow: hidden;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.post__image img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.post__details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post__userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post__userImg {
+  overflow: hidden;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.post__username {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.post__options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.1rem;
+}

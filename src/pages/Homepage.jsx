@@ -1,7 +1,10 @@
 import React from "react";
 import FollowingsCard from "../components/FollowingsCard";
+import PostCard from "../components/PostCard";
 import ProfileCard from "../components/ProfileCard";
 import "../styles/Homepage.css";
+
+const posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Homepage = () => {
   return (
@@ -29,6 +32,11 @@ const Homepage = () => {
                 Newest
               </a>
             </div>
+          </div>
+          <div className="home__feed--posts">
+            {posts.map((post) => {
+              return <PostCard />;
+            })}
           </div>
         </div>
       </div>
