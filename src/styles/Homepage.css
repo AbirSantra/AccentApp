@@ -9,8 +9,17 @@
   grid-template-columns: 16rem auto;
   gap: 2rem;
   padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 /* Home Profile Section */
+.home__profile--section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
 
 /* Home Feed Section */
 .home__feed--header {

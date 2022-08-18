@@ -1,4 +1,5 @@
 import React from "react";
+import FollowingsCard from "../components/FollowingsCard";
 import ProfileCard from "../components/ProfileCard";
 import "../styles/Homepage.css";
 
@@ -9,6 +10,7 @@ const Homepage = () => {
         {/* Profile Section */}
         <div className="home__profile--section">
           <ProfileCard />
+          <FollowingsCard />
         </div>
         {/* Feed Section */}
         <div className="home__feed--section">
