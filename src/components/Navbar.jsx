@@ -3,13 +3,13 @@ import "../styles/Navbar.css";
 import accentLogo from "../images/accent text logo.png";
 import profileImg from "../images/profile1.jpg";
 import { AiFillHome } from "react-icons/ai";
+import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import {
   // FaBookmark,
   FaSearch,
   FaUser,
   FaPlus,
   FaShoppingBag,
-  FaStar,
 } from "react-icons/fa";
 
 const Navbar = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
             </span>
           </a>
           <a href="/" className="navbar__navlink">
-            <FaStar size={26} />
+            <BsFillBookmarkHeartFill />
             <span className="tooltipcard">
               <p className="tooltiptext">Saves</p>
             </span>
