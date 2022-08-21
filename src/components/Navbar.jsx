@@ -29,7 +29,7 @@ const Navbar = () => {
               <p className="tooltiptext">Home</p>
             </span>
           </a>
-          <a href="/" className="navbar__navlink">
+          <a href="/search" className="navbar__navlink">
             <FaSearch />
             <span className="tooltipcard">
               <p className="tooltiptext">Search</p>
