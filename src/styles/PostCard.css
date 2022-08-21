@@ -58,3 +58,20 @@
   gap: 0.8rem;
   font-size: 1.1rem;
 }
+
+.post__options--icon {
+  position: relative;
+  color: var(--grey-light);
+  transition: all 0.25s ease-in-out;
+}
+
+.post__options--icon:hover {
+  color: var(--primary);
+  transition: all 0.25s ease-in-out;
+}
+
+.post__options--icon:hover .tooltipcard {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.25s ease-in-out;
+}

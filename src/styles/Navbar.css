@@ -46,42 +46,10 @@
   transition: all 0.25s ease-in;
 }
 
-.tooltipcard {
-  position: absolute;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 1;
-  left: 50%;
-  top: 3rem;
-  transform: translateX(-50%);
-  transition: all 0.25s ease-in-out;
-}
-
 .navbar__navlink:hover .tooltipcard {
   visibility: visible;
   opacity: 1;
   transition: all 0.25s ease-in-out;
-}
-
-.tooltiptext {
-  background-color: var(--background-light);
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  border-radius: 0.5rem;
-  color: var(--font-color);
-  /* color: var(--primary); */
-}
-
-.tooltipcard .tooltiptext::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent var(--background-light) transparent;
 }
 
 .navbar__profile {

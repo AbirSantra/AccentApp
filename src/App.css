@@ -77,3 +77,35 @@ img {
   background-color: var(--primary-dark);
   transition: all 0.25s ease-in-out;
 }
+
+.tooltipcard {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  left: 50%;
+  top: 3rem;
+  transform: translateX(-50%);
+  transition: all 0.25s ease-in-out;
+}
+
+.tooltiptext {
+  background-color: var(--background-light);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  color: var(--font-color);
+  /* color: var(--primary); */
+}
+
+.tooltipcard .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent var(--background-light) transparent;
+}

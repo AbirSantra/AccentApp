@@ -22,12 +22,21 @@ const PostCard = () => {
         <div className="post__options">
           <a href="/" className="post__options--icon">
             <FaHeart />
+            <span className="tooltipcard">
+              <p className="tooltiptext">Like</p>
+            </span>
           </a>
           <a href="/" className="post__options--icon">
             <BsChatDotsFill />
+            <span className="tooltipcard">
+              <p className="tooltiptext">Comment</p>
+            </span>
           </a>
           <a href="/" className="post__options--icon">
             <BiDotsHorizontalRounded size={20} />
+            <span className="tooltipcard">
+              <p className="tooltiptext">Options</p>
+            </span>
           </a>
         </div>
       </div>
