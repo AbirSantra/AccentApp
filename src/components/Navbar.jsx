@@ -48,10 +48,10 @@ const Navbar = () => {
               <p className="tooltiptext">Marketplace</p>
             </span>
           </a>
-          <a href="/" className="navbar__navlink">
+          <a href="/profile" className="navbar__navlink">
             <FaUser />
             <span className="tooltipcard">
-              <p className="tooltiptext">Account</p>
+              <p className="tooltiptext">Profile</p>
             </span>
           </a>
         </div>
