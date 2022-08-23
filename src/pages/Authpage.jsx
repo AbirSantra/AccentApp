@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Authpage.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Authpage = () => {
   // stores the initial form data
@@ -12,11 +13,19 @@ const Authpage = () => {
     confirmpassword: "",
   };
 
-  // local state to determine whether to show signup form for signin form
+  //state to determine whether to show password
+  const [showpass, setShowpass] = useState(false);
+
+  // state to determine whether to show signup form for signin form
   const [isSignup, setIsSignup] = useState(false);
 
-  // local state to store the form data
+  // state to store the form data
   const [data, setData] = useState(initialData);
+
+  //function to toggle show password state
+  const toggleShowPassword = () => {
+    setShowpass((prev) => !prev);
+  };
 
   // function to toggle the signup state
   const handleSignupToggle = () => {
@@ -88,20 +97,32 @@ const Authpage = () => {
           )}
           <div className="auth--form--input">
             <input
-              type="text"
+              type={showpass ? "text" : "password"}
               placeholder="Password"
               name="password"
               onChange={handleInputChange}
             />
+            <div
+              className="auth--form--input--btn"
+              onClick={toggleShowPassword}
+            >
+              {showpass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </div>
           </div>
           {isSignup && (
             <div className="auth--form--input">
               <input
-                type="text"
+                type={showpass ? "text" : "password"}
                 placeholder="Confirm Password"
                 name="confirmpassword"
                 onChange={handleInputChange}
               />
+              <div
+                className="auth--form--input--btn"
+                onClick={toggleShowPassword}
+              >
+                {showpass ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+              </div>
             </div>
           )}
         </form>
