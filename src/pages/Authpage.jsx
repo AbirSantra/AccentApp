@@ -2,12 +2,30 @@ import React, { useState } from "react";
 import "../styles/Authpage.css";
 
 const Authpage = () => {
+  // stores the initial form data
+  const initialData = {
+    firstname: "",
+    lastname: "",
+    emailaddress: "",
+    username: "",
+    password: "",
+    confirmpassword: "",
+  };
+
   // local state to determine whether to show signup form for signin form
   const [isSignup, setIsSignup] = useState(false);
+
+  // local state to store the form data
+  const [data, setData] = useState(initialData);
 
   // function to toggle the signup state
   const handleSignupToggle = () => {
     setIsSignup((prev) => !prev);
+  };
+
+  // function to handle input change
+  const handleInputChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   return (
@@ -29,44 +47,66 @@ const Authpage = () => {
           </p>
         </div>
         {/* Form */}
-        <div className="auth--form--container">
+        <form className="auth--form--container">
           {isSignup && (
             <div className="auth--form--input">
-              <input type="text" placeholder="First name" name="First name" />
+              <input
+                type="text"
+                placeholder="First name"
+                name="firstname"
+                onChange={handleInputChange}
+              />
             </div>
           )}
           {isSignup && (
             <div className="auth--form--input">
-              <input type="text" placeholder="Last name" name="Last name" />
+              <input
+                type="text"
+                placeholder="Last name"
+                name="lastname"
+                onChange={handleInputChange}
+              />
             </div>
           )}
           <div className="auth--form--input">
-            <input type="text" placeholder="Username" name="Username" />
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleInputChange}
+            />
           </div>
           {isSignup && (
             <div className="auth--form--input">
               <input
                 type="text"
                 placeholder="Email address"
-                name="Email address"
+                name="emailaddress"
+                onChange={handleInputChange}
               />
             </div>
           )}
           <div className="auth--form--input">
-            <input type="text" placeholder="Password" name="Password" />
+            <input
+              type="text"
+              placeholder="Password"
+              name="password"
+              onChange={handleInputChange}
+            />
           </div>
           {isSignup && (
             <div className="auth--form--input">
               <input
                 type="text"
                 placeholder="Confirm Password"
-                name="Confirm Password"
+                name="confirmpassword"
+                onChange={handleInputChange}
               />
             </div>
           )}
-        </div>
+        </form>
         {/* Button */}
-        <button className="primary-btn auth--submit--btn">
+        <button className="primary-btn auth--submit--btn" type="submit">
           Create account
         </button>
       </div>
