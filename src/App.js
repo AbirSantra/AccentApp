@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import { Routes, Route } from "react-router-dom";
 import Searchpage from "./pages/Searchpage";
 import Profilepage from "./pages/Profilepage";
+import Authpage from "./pages/Authpage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="auth" element={<Authpage />} />
         <Route path="search" element={<Searchpage />} />
         <Route path="profile" element={<Profilepage />} />
       </Routes>
