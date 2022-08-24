@@ -19,7 +19,7 @@
   align-items: center;
   flex-direction: column;
   background-color: var(--background-light);
-  background-image: url(../images/searchbg.png);
+  background-image: url(../../images/searchbg.png);
   width: 100%;
   padding: 5rem 2rem;
   border-radius: 1rem;

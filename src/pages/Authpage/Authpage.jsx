@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/Authpage.css";
+import "./Authpage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Authpage = () => {
@@ -128,7 +128,7 @@ const Authpage = () => {
         </form>
         {/* Button */}
         <button className="primary-btn auth--submit--btn" type="submit">
-          Create account
+          {isSignup ? "Create account" : "Sign In"}
         </button>
       </div>
     </div>

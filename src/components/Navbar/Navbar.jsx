@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/Navbar.css";
-import accentLogo from "../images/accent text logo.png";
-import profileImg from "../images/profile1.jpg";
+import "./Navbar.css";
+import accentLogo from "../../images/accent text logo.png";
+import profileImg from "../../images/profile1.jpg";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import {

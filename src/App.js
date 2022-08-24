@@ -1,10 +1,10 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Homepage from "./pages/Homepage";
+import Navbar from "./components/Navbar/Navbar";
+import Homepage from "./pages/Homepage/Homepage";
 import { Routes, Route } from "react-router-dom";
-import Searchpage from "./pages/Searchpage";
-import Profilepage from "./pages/Profilepage";
-import Authpage from "./pages/Authpage";
+import Searchpage from "./pages/Searchpage/Searchpage";
+import Profilepage from "./pages/Profilepage/Profilepage";
+import Authpage from "./pages/Authpage/Authpage";
 
 function App() {
   return (

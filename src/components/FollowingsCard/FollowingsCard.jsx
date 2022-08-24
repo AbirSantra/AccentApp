@@ -1,7 +1,7 @@
 import React from "react";
-import ProfileImg from "../images/profile1.jpg";
+import ProfileImg from "../../images/profile1.jpg";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import "../styles/FollowingsCard.css";
+import "./FollowingsCard.css";
 
 const FollowingsCard = () => {
   return (

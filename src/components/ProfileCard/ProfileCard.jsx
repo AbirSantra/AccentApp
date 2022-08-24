@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/ProfileCard.css";
-import coverImg from "../images/cover.jpg";
-import profileImg from "../images/profile1.jpg";
+import "./ProfileCard.css";
+import coverImg from "../../images/cover.jpg";
+import profileImg from "../../images/profile1.jpg";
 
 const ProfileCard = () => {
   return (

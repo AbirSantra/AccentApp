@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/PostCard.css";
-import postImg from "../images/post.jpg";
-import userImg from "../images/profile1.jpg";
+import "./PostCard.css";
+import postImg from "../../images/post.jpg";
+import userImg from "../../images/profile1.jpg";
 import { FaHeart } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsChatDotsFill } from "react-icons/bs";
