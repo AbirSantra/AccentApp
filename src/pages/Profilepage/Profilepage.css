@@ -34,9 +34,16 @@
   overflow: hidden;
 }
 
+.profile--image--section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .profile--image {
   position: relative;
-  top: -4rem;
+  top: -2rem;
   left: 2rem;
   display: flex;
   justify-content: center;
@@ -48,15 +55,9 @@
   overflow: hidden;
 }
 
-.profile--infosection {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .profile--userinfo {
-  margin-top: -2rem;
+  flex: 1;
+  margin-top: -1rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -80,10 +81,44 @@
 }
 
 .profile--followbtn {
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   font-weight: 500;
   font-size: 1.2rem;
+}
+
+.profile--user--stats {
+  margin-top: 1rem;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile--stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--background);
+  /* border: 1px solid var(--background); */
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 80px;
+}
+
+.profile--stat--num {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.profile--stat--label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--grey);
 }

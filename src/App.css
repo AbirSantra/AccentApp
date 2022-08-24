@@ -63,6 +63,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: fit-content;
   gap: 0.5rem;
   background-color: var(--primary);
   color: var(--font-color);
