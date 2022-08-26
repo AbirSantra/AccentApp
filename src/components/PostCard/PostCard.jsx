@@ -5,6 +5,7 @@ import userImg from "../../images/profile1.jpg";
 import { FaHeart } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsChatDotsFill } from "react-icons/bs";
+import { BsFillBookmarkHeartFill } from "react-icons/bs";
 
 const PostCard = () => {
   return (
@@ -30,6 +31,12 @@ const PostCard = () => {
             <BsChatDotsFill />
             <span className="tooltipcard">
               <p className="tooltiptext">Comment</p>
+            </span>
+          </a>
+          <a href="/" className="post__options--icon">
+            <BsFillBookmarkHeartFill />
+            <span className="tooltipcard">
+              <p className="tooltiptext">Options</p>
             </span>
           </a>
           <a href="/" className="post__options--icon">
