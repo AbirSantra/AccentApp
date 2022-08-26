@@ -2,10 +2,9 @@ import React from "react";
 import "./PostCard.css";
 import postImg from "../../images/post.jpg";
 import userImg from "../../images/profile1.jpg";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsChatDotsFill } from "react-icons/bs";
-import { BsFillBookmarkHeartFill } from "react-icons/bs";
 
 const PostCard = () => {
   return (
@@ -34,13 +33,13 @@ const PostCard = () => {
             </span>
           </a>
           <a href="/" className="post__options--icon">
-            <BsFillBookmarkHeartFill />
+            <FaStar size={22} />
             <span className="tooltipcard">
               <p className="tooltiptext">Options</p>
             </span>
           </a>
           <a href="/" className="post__options--icon">
-            <BiDotsHorizontalRounded size={20} />
+            <BiDotsHorizontalRounded />
             <span className="tooltipcard">
               <p className="tooltiptext">Options</p>
             </span>
