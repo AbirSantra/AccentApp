@@ -79,6 +79,27 @@ img {
   transition: all 0.25s ease-in-out;
 }
 
+.secondary-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 0.0625rem solid var(--primary);
+  color: var(--font-color);
+  padding: 0.5375rem 1.1375rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.secondary-btn:hover {
+  background-color: var(--primary-dark);
+  transition: all 0.25s ease-in-out;
+}
+
 .tooltipcard {
   position: absolute;
   visibility: hidden;
