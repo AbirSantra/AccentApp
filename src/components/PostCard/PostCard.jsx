@@ -35,7 +35,7 @@ const PostCard = () => {
           <a href="/" className="post__options--icon">
             <FaStar size={22} />
             <span className="tooltipcard">
-              <p className="tooltiptext">Options</p>
+              <p className="tooltiptext">Save</p>
             </span>
           </a>
           <a href="/" className="post__options--icon">
