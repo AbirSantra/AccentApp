@@ -93,3 +93,8 @@
   align-self: flex-start;
   margin-top: 1rem;
 }
+
+.auth--submit--btn:disabled {
+  cursor: not-allowed;
+  background-color: var(--primary-darkest);
+}

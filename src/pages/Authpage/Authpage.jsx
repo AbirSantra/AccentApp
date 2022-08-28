@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Authpage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "./AuthSlice";
 
 const Authpage = () => {
@@ -16,6 +16,9 @@ const Authpage = () => {
   };
 
   const dispatch = useDispatch();
+
+  // Get the authentication Loading State from redux
+  const loading = useSelector((state) => state.auth.loading);
 
   //state to determine whether to show password
   const [showpass, setShowpass] = useState(false);
@@ -64,6 +67,8 @@ const Authpage = () => {
     } else {
       dispatch(logIn(data));
     }
+
+    resetFormInput();
   };
 
   return (
@@ -165,8 +170,16 @@ const Authpage = () => {
             </span>
           )}
           {/* Button */}
-          <button className="primary-btn auth--submit--btn" type="submit">
-            {isSignup ? "Create account" : "Sign In"}
+          <button
+            className="primary-btn auth--submit--btn"
+            type="submit"
+            disabled={loading}
+          >
+            {loading
+              ? "Submitting..."
+              : isSignup
+              ? "Create account"
+              : "Sign In"}
           </button>
         </form>
       </div>

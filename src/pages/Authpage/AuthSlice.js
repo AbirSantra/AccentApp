@@ -7,6 +7,7 @@ const initialState = {
   authData: null,
   loading: false,
   error: false,
+  errorMessage: null,
 };
 
 //! Logging in User
@@ -44,6 +45,18 @@ const counterSlice = createSlice({
         state.loading = false;
       })
       .addCase(logIn.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+      })
+      .addCase(signUp.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(signUp.fulfilled, (state, action) => {
+        localStorage.setItem("profile", JSON.stringify(action?.payload));
+        state.authData = action.payload;
+        state.loading = false;
+      })
+      .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
       });
