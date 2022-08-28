@@ -11,13 +11,14 @@ import {
   FaShoppingBag,
   FaStar,
 } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../pages/Authpage/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.authData);
 
   // Function to Logout User
   const handleLogOut = () => {
@@ -33,49 +34,53 @@ const Navbar = () => {
         </Link>
 
         {/* Middle Navlinks Section */}
-        <div className="navbar__navlinks">
-          <Link to="/home" className="navbar__navlink">
-            <AiFillHome size={28} />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Home</p>
-            </span>
-          </Link>
-          <Link to="/search" className="navbar__navlink">
-            <FaSearch />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Search</p>
-            </span>
-          </Link>
-          <Link to="/save" className="navbar__navlink">
-            <FaStar size={26} />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Saves</p>
-            </span>
-          </Link>
+        {user && (
+          <div className="navbar__navlinks">
+            <Link to="/home" className="navbar__navlink">
+              <AiFillHome size={28} />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Home</p>
+              </span>
+            </Link>
+            <Link to="/search" className="navbar__navlink">
+              <FaSearch />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Search</p>
+              </span>
+            </Link>
+            <Link to="/save" className="navbar__navlink">
+              <FaStar size={26} />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Saves</p>
+              </span>
+            </Link>
 
-          <Link to="/marketplace" className="navbar__navlink">
-            <FaShoppingBag />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Marketplace</p>
-            </span>
-          </Link>
-          <Link to="/profile" className="navbar__navlink">
-            <FaUser />
-            <span className="tooltipcard">
-              <p className="tooltiptext">Profile</p>
-            </span>
-          </Link>
-        </div>
+            <Link to="/marketplace" className="navbar__navlink">
+              <FaShoppingBag />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Marketplace</p>
+              </span>
+            </Link>
+            <Link to="/profile" className="navbar__navlink">
+              <FaUser />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Profile</p>
+              </span>
+            </Link>
+          </div>
+        )}
 
         {/* Right Profile Section */}
-        <div className="navbar__profile">
-          <div className="navbar__profile--icon" onClick={handleLogOut}>
-            <img src={profileImg} alt="profile" />
+        {user && (
+          <div className="navbar__profile">
+            <div className="navbar__profile--icon" onClick={handleLogOut}>
+              <img src={profileImg} alt="profile" />
+            </div>
+            <button className="primary-btn navbar__uploadbtn">
+              <FaPlus /> New Post
+            </button>
           </div>
-          <button className="primary-btn navbar__uploadbtn">
-            <FaPlus /> New Post
-          </button>
-        </div>
+        )}
       </div>
     </nav>
   );
