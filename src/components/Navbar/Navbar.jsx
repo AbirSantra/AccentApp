@@ -11,54 +11,65 @@ import {
   FaShoppingBag,
   FaStar,
 } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../pages/Authpage/AuthSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Function to Logout User
+  const handleLogOut = () => {
+    dispatch(logOut(navigate));
+  };
+
   return (
     <nav className="navbar">
       <div className="container navbar__container">
         {/* Left Logo Section */}
-        <a href="/" className="navbar__logo">
+        <Link to="/" className="navbar__logo">
           <img src={accentLogo} alt="accent-logo" />
-        </a>
+        </Link>
 
         {/* Middle Navlinks Section */}
         <div className="navbar__navlinks">
-          <a href="/" className="navbar__navlink">
+          <Link to="/home" className="navbar__navlink">
             <AiFillHome size={28} />
             <span className="tooltipcard">
               <p className="tooltiptext">Home</p>
             </span>
-          </a>
-          <a href="/search" className="navbar__navlink">
+          </Link>
+          <Link to="/search" className="navbar__navlink">
             <FaSearch />
             <span className="tooltipcard">
               <p className="tooltiptext">Search</p>
             </span>
-          </a>
-          <a href="/" className="navbar__navlink">
+          </Link>
+          <Link to="/save" className="navbar__navlink">
             <FaStar size={26} />
             <span className="tooltipcard">
               <p className="tooltiptext">Saves</p>
             </span>
-          </a>
+          </Link>
 
-          <a href="/" className="navbar__navlink">
+          <Link to="/marketplace" className="navbar__navlink">
             <FaShoppingBag />
             <span className="tooltipcard">
               <p className="tooltiptext">Marketplace</p>
             </span>
-          </a>
-          <a href="/profile" className="navbar__navlink">
+          </Link>
+          <Link to="/profile" className="navbar__navlink">
             <FaUser />
             <span className="tooltipcard">
               <p className="tooltiptext">Profile</p>
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Right Profile Section */}
         <div className="navbar__profile">
-          <div className="navbar__profile--icon">
+          <div className="navbar__profile--icon" onClick={handleLogOut}>
             <img src={profileImg} alt="profile" />
           </div>
           <button className="primary-btn navbar__uploadbtn">
