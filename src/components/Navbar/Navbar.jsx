@@ -13,16 +13,15 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../pages/Authpage/AuthSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.authData);
 
   // Function to Logout User
   const handleLogOut = () => {
-    dispatch(logOut(navigate));
+    dispatch(logOut());
   };
 
   return (

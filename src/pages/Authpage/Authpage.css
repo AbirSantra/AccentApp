@@ -80,9 +80,9 @@
   color: var(--font-color);
 }
 
-.confirm--password--error {
+.auth--error {
   width: 100%;
-  text-align: right;
+  /* text-align: right; */
   font-size: 0.9rem;
   font-weight: 300;
   color: orangered;

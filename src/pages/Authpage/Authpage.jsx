@@ -3,6 +3,7 @@ import "./Authpage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "./AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Authpage = () => {
   // stores the initial form data
@@ -16,9 +17,16 @@ const Authpage = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Get the authentication Loading State from redux
   const loading = useSelector((state) => state.auth.loading);
+
+  // Get the error state from redux
+  const error = useSelector((state) => state.auth.error);
+
+  // Get error message from redux
+  const errorMessage = useSelector((state) => state.auth.errorMessage);
 
   //state to determine whether to show password
   const [showpass, setShowpass] = useState(false);
@@ -60,15 +68,17 @@ const Authpage = () => {
 
     if (isSignup) {
       if (data.password === data.confirmpassword) {
-        dispatch(signUp(data));
+        dispatch(signUp(data))
+          .unwrap()
+          .then(() => navigate("../home", { replace: true }));
       } else {
         setConfirmPassword(false);
       }
     } else {
-      dispatch(logIn(data));
+      dispatch(logIn(data))
+        .unwrap()
+        .then(() => navigate("../home", { replace: true }));
     }
-
-    resetFormInput();
   };
 
   return (
@@ -89,6 +99,8 @@ const Authpage = () => {
             </button>
           </p>
         </div>
+        {/* Error Message */}
+        {error && <span className="auth--error">⚠️ {errorMessage}</span>}
         {/* Form */}
         <form className="auth--form--container" onSubmit={handleFormSubmit}>
           {isSignup && (
@@ -165,7 +177,7 @@ const Authpage = () => {
             </div>
           )}
           {!confirmPassword && isSignup && (
-            <span className="confirm--password--error">
+            <span className="auth--error">
               ⚠️ Passwords do not match! Please check and try again.
             </span>
           )}
