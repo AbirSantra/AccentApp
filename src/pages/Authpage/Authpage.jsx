@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Authpage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { logIn, signUp } from "./AuthSlice";
 
 const Authpage = () => {
   // stores the initial form data
@@ -12,6 +14,8 @@ const Authpage = () => {
     password: "",
     confirmpassword: "",
   };
+
+  const dispatch = useDispatch();
 
   //state to determine whether to show password
   const [showpass, setShowpass] = useState(false);
@@ -52,9 +56,13 @@ const Authpage = () => {
     e.preventDefault();
 
     if (isSignup) {
-      if (data.password !== data.confirmpassword) {
+      if (data.password === data.confirmpassword) {
+        dispatch(signUp(data));
+      } else {
         setConfirmPassword(false);
       }
+    } else {
+      dispatch(logIn(data));
     }
   };
 
