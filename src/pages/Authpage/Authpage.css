@@ -79,3 +79,17 @@
   font-size: 1rem;
   color: var(--font-color);
 }
+
+.confirm--password--error {
+  width: 100%;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: orangered;
+  font-style: italic;
+}
+
+.auth--submit--btn {
+  align-self: flex-start;
+  margin-top: 1rem;
+}

@@ -7,7 +7,7 @@ const Authpage = () => {
   const initialData = {
     firstname: "",
     lastname: "",
-    emailaddress: "",
+    email: "",
     username: "",
     password: "",
     confirmpassword: "",
@@ -22,19 +22,40 @@ const Authpage = () => {
   // state to store the form data
   const [data, setData] = useState(initialData);
 
+  // state to store password and confirm password validity
+  const [confirmPassword, setConfirmPassword] = useState(true);
+
   //function to toggle show password state
   const toggleShowPassword = () => {
     setShowpass((prev) => !prev);
   };
 
-  // function to toggle the signup state
-  const handleSignupToggle = () => {
-    setIsSignup((prev) => !prev);
-  };
-
   // function to handle input change
   const handleInputChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  // function to reset input values on submit or form switch
+  const resetFormInput = () => {
+    setConfirmPassword(true);
+    setData(initialData);
+  };
+
+  // function to toggle the signup state
+  const handleSignupToggle = () => {
+    setIsSignup((prev) => !prev);
+    resetFormInput();
+  };
+
+  //function to handle form submission
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignup) {
+      if (data.password !== data.confirmpassword) {
+        setConfirmPassword(false);
+      }
+    }
   };
 
   return (
@@ -56,7 +77,7 @@ const Authpage = () => {
           </p>
         </div>
         {/* Form */}
-        <form className="auth--form--container">
+        <form className="auth--form--container" onSubmit={handleFormSubmit}>
           {isSignup && (
             <div className="auth--form--input">
               <input
@@ -64,6 +85,7 @@ const Authpage = () => {
                 placeholder="First name"
                 name="firstname"
                 onChange={handleInputChange}
+                value={data.firstname}
               />
             </div>
           )}
@@ -74,6 +96,7 @@ const Authpage = () => {
                 placeholder="Last name"
                 name="lastname"
                 onChange={handleInputChange}
+                value={data.lastname}
               />
             </div>
           )}
@@ -83,6 +106,7 @@ const Authpage = () => {
               placeholder="Username"
               name="username"
               onChange={handleInputChange}
+              value={data.username}
             />
           </div>
           {isSignup && (
@@ -90,8 +114,9 @@ const Authpage = () => {
               <input
                 type="text"
                 placeholder="Email address"
-                name="emailaddress"
+                name="email"
                 onChange={handleInputChange}
+                value={data.email}
               />
             </div>
           )}
@@ -101,6 +126,7 @@ const Authpage = () => {
               placeholder="Password"
               name="password"
               onChange={handleInputChange}
+              value={data.password}
             />
             <div
               className="auth--form--input--btn"
@@ -125,11 +151,16 @@ const Authpage = () => {
               </div>
             </div>
           )}
+          {!confirmPassword && isSignup && (
+            <span className="confirm--password--error">
+              ⚠️ Passwords do not match! Please check and try again.
+            </span>
+          )}
+          {/* Button */}
+          <button className="primary-btn auth--submit--btn" type="submit">
+            {isSignup ? "Create account" : "Sign In"}
+          </button>
         </form>
-        {/* Button */}
-        <button className="primary-btn auth--submit--btn" type="submit">
-          {isSignup ? "Create account" : "Sign In"}
-        </button>
       </div>
     </div>
   );
