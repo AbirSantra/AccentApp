@@ -11,6 +11,8 @@ function App() {
   const user = useSelector((state) => state.auth.authData);
   // const user = JSON.parse(localStorage.getItem("profile"));
 
+  /* Navbar is displayed on every page. Auth page will be displayed only if user is NOT logged in or they will be redirected to the home page. All other pages will be displayed if user IS logged in. Else, they will be redirected to the Auth page. */
+
   return (
     <div className="App">
       <Navbar />
