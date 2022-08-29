@@ -17,6 +17,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
+  // Getting the user info from the global state
   const user = useSelector((state) => state.auth.authData);
 
   // Function to Logout User
@@ -32,7 +34,7 @@ const Navbar = () => {
           <img src={accentLogo} alt="accent-logo" />
         </Link>
 
-        {/* Middle Navlinks Section */}
+        {/* Middle Navlinks Section. Renders only when user is logged in */}
         {user && (
           <div className="navbar__navlinks">
             <Link to="/home" className="navbar__navlink">
@@ -69,7 +71,7 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Right Profile Section */}
+        {/* Right Profile Section. Renders only when user if logged in */}
         {user && (
           <div className="navbar__profile">
             <div className="navbar__profile--icon" onClick={handleLogOut}>
