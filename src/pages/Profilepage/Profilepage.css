@@ -70,11 +70,16 @@
   margin-top: 1rem;
 }
 
+.profile--actions--btn {
+  width: 8rem;
+  font-weight: 500;
+}
+
 .profile--stats--section {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 2rem;
   margin-top: 1.5rem;
 }
 
