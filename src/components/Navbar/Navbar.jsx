@@ -13,10 +13,11 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../pages/Authpage/AuthSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Getting the user info from the global state
   const user = useSelector((state) => state.auth.authData);
@@ -24,6 +25,12 @@ const Navbar = () => {
   // Function to Logout User
   const handleLogOut = () => {
     dispatch(logOut());
+  };
+
+  // Function to direct to UploadPost page
+  const handleNewPost = (e) => {
+    e.preventDefault();
+    navigate("../upload");
   };
 
   return (
@@ -77,7 +84,10 @@ const Navbar = () => {
             <div className="navbar__profile--icon" onClick={handleLogOut}>
               <img src={profileImg} alt="profile" />
             </div>
-            <button className="primary-btn navbar__uploadbtn">
+            <button
+              className="primary-btn navbar__uploadbtn"
+              onClick={handleNewPost}
+            >
               <FaPlus /> New Post
             </button>
           </div>
