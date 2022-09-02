@@ -5,7 +5,7 @@ import * as AuthApi from "../../api/AuthApi";
 
 const initialState = {
   authData: localStorage.getItem("profile")
-    ? localStorage.getItem("profile")
+    ? JSON.parse(localStorage.getItem("profile"))
     : null,
   loading: false,
   error: false,
