@@ -15,7 +15,7 @@
 
 .upload--form--container {
   width: 100%;
-  max-width: 50rem;
+  max-width: 40rem;
   background-color: var(--background-light);
   padding: 2rem;
   border-radius: 1rem;
@@ -120,10 +120,11 @@
   font-size: 2rem;
   transition: all 0.25s ease-in-out;
   cursor: pointer;
+  color: var(--primary);
 }
 
 .upload--form--preview--closeBtn:hover {
-  color: var(--primary);
+  color: var(--primary-darker);
   transition: all 0.25s ease-in-out;
 }
 
