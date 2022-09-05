@@ -115,7 +115,7 @@
 
 .upload--form--preview--closeBtn {
   position: absolute;
-  top: -1rem;
+  top: 1rem;
   right: -1rem;
   font-size: 2rem;
   transition: all 0.25s ease-in-out;
@@ -135,6 +135,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .upload--form--imageInput {
@@ -147,4 +148,16 @@
   align-items: center;
   gap: 1rem;
   font-weight: 300;
+}
+
+.upload--submit--btn {
+  align-self: flex-end;
+}
+
+.upload--form--error--message {
+  font-size: 0.9rem;
+  color: red;
+  font-style: italic;
+  font-weight: 300;
+  align-self: flex-end;
 }

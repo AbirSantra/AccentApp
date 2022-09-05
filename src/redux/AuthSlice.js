@@ -1,7 +1,7 @@
 //! This file contains all the redux logic for authentication
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as AuthApi from "../../api/AuthApi";
+import * as AuthApi from "../api/AuthApi";
 
 const initialState = {
   authData: localStorage.getItem("profile")

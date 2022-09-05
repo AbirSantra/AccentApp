@@ -12,7 +12,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../pages/Authpage/AuthSlice";
+import { logOut } from "../../redux/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {

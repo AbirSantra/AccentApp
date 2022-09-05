@@ -1,27 +1,97 @@
 import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Uploadpage.css";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { storage } from "../../firebase";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { uploadPost } from "../../redux/UploadSlice";
+import { useNavigate } from "react-router-dom";
 
 const Uploadpage = () => {
   // Get user details from redux store
   const user = useSelector((state) => state.auth.authData);
-  const name = user.existingUser.firstname;
+  const name = user.user.firstname;
 
-  // State to store the selected image
-  const [uploadImage, setUploadImage] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Reference to upload image input
+  // Get upload loading state from global state
+  const loading = useSelector((state) => state.upload.loading);
+
+  // Get the error state and error message from global state
+  const error = useSelector((state) => state.upload.error);
+  const errorMsg = useSelector((state) => state.upload.errorMessage);
+
+  //State to store the title and handle title change
+  const [title, setTitle] = useState("");
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  //State to store the description and handle description change
+  const [desc, setDesc] = useState("");
+  const handleDescChange = (e) => {
+    setDesc(e.target.value);
+  };
+
+  // State for image error message
+  const [imageErrorMessage, setImageErrorMessage] = useState(null);
+
+  // State to store the selected image and handle image change
+  const [image, setImage] = useState(null);
   const imageRef = useRef();
-
-  // Function to set the image
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       let img = e.target.files[0];
-      setUploadImage({
-        image: URL.createObjectURL(img),
-      });
+      setImage(img);
+      setImageErrorMessage(null);
     }
+  };
+
+  // State to store the image uploading progress
+  const [progress, setProgress] = useState(null);
+
+  // Function to upload image and save post to database
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    // check if the image is attached
+    if (!image) {
+      setImageErrorMessage("No file attached! Please try again.");
+      return;
+    } else if (image.size > 2 * 1024 * 1024) {
+      setImageErrorMessage(
+        "File size too big! Please compress your file to a smaller size."
+      );
+      return;
+    }
+    const imageName = new Date().getTime() + name + image.name;
+    const storageRef = ref(storage, `posts/${imageName}`);
+    const uploadTask = uploadBytesResumable(storageRef, image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        setImageErrorMessage(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          const newPost = {
+            userId: user.user._id,
+            title: title,
+            desc: desc,
+            image: downloadURL,
+          };
+          dispatch(uploadPost(newPost))
+            .unwrap()
+            .then(() => navigate("../home", { replace: true }));
+        });
+      }
+    );
   };
 
   return (
@@ -35,7 +105,7 @@ const Uploadpage = () => {
             now!
           </p>
           {/* Form Body */}
-          <form className="upload--form--body">
+          <form className="upload--form--body" onSubmit={handleFormSubmit}>
             {/* Title */}
             <div className="upload--form--input">
               <label htmlFor="title">Title: </label>
@@ -44,6 +114,8 @@ const Uploadpage = () => {
                 placeholder="Give your post a title"
                 name="title"
                 id="title"
+                value={title}
+                onChange={handleTitleChange}
               />
             </div>
 
@@ -51,11 +123,13 @@ const Uploadpage = () => {
             <div className="upload--form--input">
               <label htmlFor="desc">Description: </label>
               <textarea
-                placeholder="Add some description"
+                placeholder="Let's add some description"
                 className="upload--form--input--field"
                 name="desc"
                 rows="auto"
                 id="desc"
+                value={desc}
+                onChange={handleDescChange}
               />
             </div>
 
@@ -71,27 +145,31 @@ const Uploadpage = () => {
             </div>
 
             {/* Photo Browse */}
-            {!uploadImage && (
+            {!image && (
               <div className="upload--form--file--container">
                 <div
                   className="upload--form--file"
                   onClick={() => imageRef.current.click()}
                 >
                   <p>Click here to browse images</p>
-                  <p>16:9 aspect ratio recommended. Max size: 5mb</p>
+                  <p>16:9 aspect ratio recommended. Max size: 2mb</p>
                 </div>
               </div>
             )}
 
             {/* Image Preview */}
-            {uploadImage && (
+            {image && (
               <div className="upload--form--preview">
+                <p className="upload--form--preview--title">Preview: </p>
                 <AiFillCloseCircle
                   className="upload--form--preview--closeBtn"
-                  onClick={() => setUploadImage(null)}
+                  onClick={() => {
+                    setImage(null);
+                    imageRef.current.value = null;
+                  }}
                 />
                 <div className="upload--form--preview--image">
-                  <img src={uploadImage.image} alt="uploadImage" />
+                  <img src={URL.createObjectURL(image)} alt="uploadImage" />
                 </div>
               </div>
             )}
@@ -102,21 +180,41 @@ const Uploadpage = () => {
                 type="file"
                 name="uploadImage"
                 id="uploadImage"
+                accept="image/*"
                 ref={imageRef}
                 onChange={onImageChange}
               />
             </div>
 
-            {/* <div className="upload--form--confirm">
+            {/* Confirm */}
+            <div className="upload--form--confirm">
               <input type="checkbox" name="confirm" id="confirm" />
               <label htmlFor="confirm">
                 I confirm that this post is my own creation.
               </label>
-            </div> */}
+            </div>
+
+            {/* Error Message */}
+            {imageErrorMessage && (
+              <p className="upload--form--error--message">
+                ⚠️{imageErrorMessage}
+              </p>
+            )}
+            {error && (
+              <p className="upload--form--error--message">⚠️{errorMsg}</p>
+            )}
 
             {/* Submit Button */}
-            <button className="primary-btn upload--submit--btn" type="submit">
-              Submit Post
+            <button
+              className="primary-btn upload--submit--btn"
+              type="submit"
+              disabled={progress || loading}
+            >
+              {progress !== null && progress !== 0 && progress < 100
+                ? `Uploading Image ${progress}%`
+                : progress === 100 || loading
+                ? "Saving your Post"
+                : "Submit Post"}
             </button>
           </form>
         </div>

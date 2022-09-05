@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Authpage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { logIn, signUp } from "./AuthSlice";
+import { logIn, signUp } from "../../redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 
 const Authpage = () => {
