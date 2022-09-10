@@ -3,7 +3,7 @@ import "./ProfileCard.css";
 import coverImg from "../../images/cover.jpg";
 import profileImg from "../../images/profile1.jpg";
 
-const ProfileCard = () => {
+const ProfileCard = ({ userData }) => {
   return (
     <div className="profileCard__container">
       {/* DP and Banner */}
@@ -17,20 +17,22 @@ const ProfileCard = () => {
       </div>
       {/* Name, Username, Headline */}
       <div className="profileCard__info">
-        <h1 className="profileCard__name">Abir Santra</h1>
-        <p className="profileCard__username">@thedrummingfreak</p>
+        <h1 className="profileCard__name">
+          {userData.firstname + " " + userData.lastname}
+        </h1>
+        <p className="profileCard__username">@{userData.username}</p>
         <p className="profileCard__bio">
-          FullStack Web Developer | Graphic Designer | Drummer | Gamer
+          {userData.bio ? `${userData.bio}` : "No Bio"}
         </p>
       </div>
       {/* Profile Stats */}
       <div className="profileCard__stats">
         <section className="profileCard__stat">
-          <p className="stat__num">1.2K</p>
+          <p className="stat__num">{userData.followers.length}</p>
           <p className="stat__label">Followers</p>
         </section>
         <section className="profileCard__stat">
-          <p className="stat__num">3.6K</p>
+          <p className="stat__num">{userData.following.length}</p>
           <p className="stat__label">Followings</p>
         </section>
       </div>

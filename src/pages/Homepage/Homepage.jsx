@@ -42,7 +42,7 @@ const Homepage = () => {
       <div className="container home__container">
         {/* Profile Section */}
         <div className="home__profile--section">
-          <ProfileCard />
+          <ProfileCard userData={user} />
           <FollowingsCard />
         </div>
         {/* Feed Section */}
@@ -94,7 +94,11 @@ const Homepage = () => {
             </div>
           </div>
           {postsLoading ? (
-            <p>Loading</p>
+            postsLoadingError ? (
+              <p>{postsLoadingError}</p>
+            ) : (
+              <p>Loading</p>
+            )
           ) : (
             <div className="home__feed--posts">
               {postData.map((post) => {
