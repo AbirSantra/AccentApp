@@ -43,7 +43,7 @@ const Homepage = () => {
         {/* Profile Section */}
         <div className="home__profile--section">
           <ProfileCard userData={user} />
-          <FollowingsCard />
+          <FollowingsCard userData={user.following} />
         </div>
         {/* Feed Section */}
         <div className="home__feed--section">

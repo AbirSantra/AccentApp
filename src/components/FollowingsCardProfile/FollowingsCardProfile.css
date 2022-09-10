@@ -1,0 +1,39 @@
+.followingsCard__profile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.followingsCard__profile--image {
+  height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.followingsCard__profile--name {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.followingsCard__profile--options {
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.followingsCard__seemore {
+  width: 100%;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.followingsCard__seemore a {
+  color: var(--primary);
+}
