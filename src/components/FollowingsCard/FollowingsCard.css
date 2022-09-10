@@ -24,3 +24,8 @@
   width: 100%;
   gap: 1rem;
 }
+
+.followingsCard__list p {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
