@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PostCard.css";
-import postImg from "../../images/post.jpg";
 import userImg from "../../images/profile1.jpg";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsChatDotsFill } from "react-icons/bs";
+import { useEffect } from "react";
+import { getUser } from "../../api/UserApi";
 
 const PostCard = (post) => {
-  const postImageUrl = post.data.image;
+  // Get the post details from props
+  const { image, userId } = post.data;
+
+  // Get the post user details
+  const [postUser, setPostUser] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUser(userId);
+      setPostUser(res.data);
+    };
+    fetchUser();
+  }, [userId]);
+
   return (
     <div className="postcard__container">
       <div className="post__image">
-        <img src={postImageUrl} alt="postimg" />
+        <img src={image} alt="postimg" />
       </div>
       <div className="post__details">
         <div className="post__userInfo">
           <div className="post__userImg">
             <img src={userImg} alt="userimage" />
           </div>
-          <p className="post__username">blackflash</p>
+          <p className="post__username">{postUser.username}</p>
         </div>
         <div className="post__options">
           <a href="/" className="post__options--icon">
