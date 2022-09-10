@@ -6,11 +6,12 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsChatDotsFill } from "react-icons/bs";
 
-const PostCard = () => {
+const PostCard = (post) => {
+  const postImageUrl = post.data.image;
   return (
     <div className="postcard__container">
       <div className="post__image">
-        <img src={postImg} alt="postimg" />
+        <img src={postImageUrl} alt="postimg" />
       </div>
       <div className="post__details">
         <div className="post__userInfo">

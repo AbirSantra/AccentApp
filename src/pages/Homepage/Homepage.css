@@ -7,6 +7,8 @@
   position: relative;
   display: grid;
   grid-template-columns: 16rem auto;
+  align-items: flex-start;
+  width: 100%;
   gap: 2rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -16,7 +18,7 @@
 .home__profile--section {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
@@ -68,9 +70,15 @@
   transition: all 0.25s ease-in-out;
 }
 
+.home__feed--link--active {
+  color: var(--primary);
+}
+
 /*! Feed Posts */
 .home__feed--posts {
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto auto;
+  justify-content: start;
   gap: 1.5rem;
 }

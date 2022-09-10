@@ -4,7 +4,7 @@ import "./Uploadpage.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { storage } from "../../firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { uploadPost } from "../../redux/UploadSlice";
+import { uploadPost } from "../../redux/PostSlice";
 import { useNavigate } from "react-router-dom";
 
 const Uploadpage = () => {
@@ -16,11 +16,11 @@ const Uploadpage = () => {
   const navigate = useNavigate();
 
   // Get upload loading state from global state
-  const loading = useSelector((state) => state.upload.loading);
+  const loading = useSelector((state) => state.post.loading);
 
   // Get the error state and error message from global state
-  const error = useSelector((state) => state.upload.error);
-  const errorMsg = useSelector((state) => state.upload.errorMessage);
+  const error = useSelector((state) => state.post.error);
+  const errorMsg = useSelector((state) => state.post.errorMessage);
 
   //State to store the title and handle title change
   const [title, setTitle] = useState("");
@@ -33,6 +33,9 @@ const Uploadpage = () => {
   const handleDescChange = (e) => {
     setDesc(e.target.value);
   };
+
+  // State to store upload button state
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
   // State for image error message
   const [imageErrorMessage, setImageErrorMessage] = useState(null);
@@ -64,6 +67,7 @@ const Uploadpage = () => {
       );
       return;
     }
+    setBtnDisabled(true);
     const imageName = new Date().getTime() + name + image.name;
     const storageRef = ref(storage, `posts/${imageName}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
@@ -77,6 +81,7 @@ const Uploadpage = () => {
       },
       (error) => {
         setImageErrorMessage(error);
+        setBtnDisabled(false);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -88,7 +93,10 @@ const Uploadpage = () => {
           };
           dispatch(uploadPost(newPost))
             .unwrap()
-            .then(() => navigate("../home", { replace: true }));
+            .then(() => {
+              navigate("../home", { replace: true });
+              setBtnDisabled(false);
+            });
         });
       }
     );
@@ -106,6 +114,36 @@ const Uploadpage = () => {
           </p>
           {/* Form Body */}
           <form className="upload--form--body" onSubmit={handleFormSubmit}>
+            {/* Photo Browse */}
+            {!image && (
+              <div className="upload--form--file--container">
+                <div
+                  className="upload--form--file"
+                  onClick={() => imageRef.current.click()}
+                >
+                  <p>Click here to browse images</p>
+                  <p>16:9 aspect ratio recommended. Max size: 2mb</p>
+                </div>
+              </div>
+            )}
+
+            {/* Image Preview */}
+            {image && (
+              <div className="upload--form--preview">
+                <p className="upload--form--preview--title">Preview: </p>
+                <AiFillCloseCircle
+                  className="upload--form--preview--closeBtn"
+                  onClick={() => {
+                    setImage(null);
+                    imageRef.current.value = null;
+                  }}
+                />
+                <div className="upload--form--preview--image">
+                  <img src={URL.createObjectURL(image)} alt="uploadImage" />
+                </div>
+              </div>
+            )}
+
             {/* Title */}
             <div className="upload--form--input">
               <label htmlFor="title">Title: </label>
@@ -144,36 +182,6 @@ const Uploadpage = () => {
               />
             </div>
 
-            {/* Photo Browse */}
-            {!image && (
-              <div className="upload--form--file--container">
-                <div
-                  className="upload--form--file"
-                  onClick={() => imageRef.current.click()}
-                >
-                  <p>Click here to browse images</p>
-                  <p>16:9 aspect ratio recommended. Max size: 2mb</p>
-                </div>
-              </div>
-            )}
-
-            {/* Image Preview */}
-            {image && (
-              <div className="upload--form--preview">
-                <p className="upload--form--preview--title">Preview: </p>
-                <AiFillCloseCircle
-                  className="upload--form--preview--closeBtn"
-                  onClick={() => {
-                    setImage(null);
-                    imageRef.current.value = null;
-                  }}
-                />
-                <div className="upload--form--preview--image">
-                  <img src={URL.createObjectURL(image)} alt="uploadImage" />
-                </div>
-              </div>
-            )}
-
             {/* Image Input */}
             <div className="upload--form--imageInput">
               <input
@@ -206,11 +214,15 @@ const Uploadpage = () => {
 
             {/* Submit Button */}
             <button
-              className="primary-btn upload--submit--btn"
+              className={
+                progress || loading || btnDisabled
+                  ? "primary-btn upload--submit--btn btn-disabled"
+                  : "primary-btn upload--submit--btn "
+              }
               type="submit"
-              disabled={progress || loading}
+              disabled={progress || loading || btnDisabled}
             >
-              {progress !== null && progress !== 0 && progress < 100
+              {progress !== null && progress < 100
                 ? `Uploading Image ${progress}%`
                 : progress === 100 || loading
                 ? "Saving your Post"
