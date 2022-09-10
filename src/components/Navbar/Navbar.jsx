@@ -20,8 +20,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // Getting the user info from the global state
-  const { user } = useSelector((state) => state.auth.authData);
-  console.log(user._id);
+  const user = useSelector((state) => state.auth.authData);
 
   // Function to Logout User
   const handleLogOut = () => {
@@ -70,7 +69,7 @@ const Navbar = () => {
                 <p className="tooltiptext">Marketplace</p>
               </span>
             </Link>
-            <Link to={`/profile/${user._id}`} className="navbar__navlink">
+            <Link to={`/profile/${user.user._id}`} className="navbar__navlink">
               <FaUser />
               <span className="tooltipcard">
                 <p className="tooltiptext">Profile</p>
