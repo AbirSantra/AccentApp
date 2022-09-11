@@ -19,3 +19,11 @@ export const getPopularPosts = () => API.get("post/popular");
 // Api call for liking/unliking a post
 export const likePost = (id, userId) =>
   API.put(`post/${id}/like`, { userId: userId });
+
+// Api call for unsaving a post
+export const savePost = (id, userId) =>
+  API.put(`post/${id}/save`, { userId: userId });
+
+// Api call for unsaving a post
+export const unsavePost = (id, userId) =>
+  API.put(`post/${id}/unsave`, { userId: userId });

@@ -6,10 +6,15 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { useEffect } from "react";
 import { getUser } from "../../api/UserApi";
 import { likePost } from "../../api/PostApi";
+import { useDispatch, useSelector } from "react-redux";
+import { savePost, unsavePost } from "../../redux/AuthSlice";
 
 const PostCard = (post) => {
+  const dispatch = useDispatch();
+
   // Get the current user id
-  const currentUserId = post.currentUser;
+  const currentUser = useSelector((state) => state.auth.authData.user);
+  const currentUserId = currentUser._id;
 
   // Get the post details from props
   const { _id, image, userId, likes } = post.data;
@@ -26,7 +31,6 @@ const PostCard = (post) => {
 
   // To store the liked state of the post
   const [liked, setLiked] = useState(likes.includes(currentUserId));
-  console.log(_id + "" + liked);
 
   // To store the likes count of the post
   const [likesCount, setLikesCount] = useState(likes.length);
@@ -39,6 +43,20 @@ const PostCard = (post) => {
     liked
       ? setLikesCount((prev) => prev - 1)
       : setLikesCount((prev) => prev + 1);
+  };
+
+  // To store the saved state of the post
+  const [saved, setSaved] = useState(currentUser.savedPosts.includes(_id));
+
+  // Function to handle savepost
+  const handleSavePost = (e) => {
+    e.preventDefault();
+    if (saved === true) {
+      dispatch(unsavePost({ id: _id, userId: currentUserId }));
+    } else if (saved === false) {
+      dispatch(savePost({ id: _id, userId: currentUserId }));
+    }
+    setSaved((prev) => !prev);
   };
 
   return (
@@ -68,12 +86,19 @@ const PostCard = (post) => {
               <p className="tooltiptext">Like</p>
             </span>
           </button>
-          <a href="/" className="post__options--icon">
+          <button
+            onClick={handleSavePost}
+            className={
+              saved
+                ? "post__options--icon post__options--icon--active"
+                : "post__options--icon"
+            }
+          >
             <FaStar size={22} />
             <span className="tooltipcard">
               <p className="tooltiptext">Save</p>
             </span>
-          </a>
+          </button>
           {currentUserId === userId && (
             <a href="/" className="post__options--icon">
               <BiDotsHorizontalRounded />

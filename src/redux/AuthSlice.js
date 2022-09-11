@@ -2,6 +2,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as AuthApi from "../api/AuthApi";
+import * as PostApi from "../api/PostApi";
 
 const initialState = {
   authData: localStorage.getItem("profile")
@@ -39,6 +40,33 @@ export const signUp = createAsyncThunk(
     }
   }
   /* Call the api for the login with the form data. If login successful, return data. If login not successful, (e.g -> Username or email already exists) return the error message */
+);
+
+//! Saving a post to user
+export const savePost = createAsyncThunk(
+  "auth/savePost",
+  async ({ id, userId }, { rejectWithValue }) => {
+    try {
+      await PostApi.savePost(id, userId);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+  /* Call the api for saving a post. If saving successful return the updated user. If error, return error message */
+);
+
+//! Unsaving a post from user
+export const unsavePost = createAsyncThunk(
+  "auth/unsavePost",
+  async ({ id, userId }, { rejectWithValue }) => {
+    try {
+      await PostApi.unsavePost(id, userId);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
 );
 
 const authSlice = createSlice({
@@ -84,6 +112,45 @@ const authSlice = createSlice({
       })
       .addCase(signUp.rejected, (state, action) => {
         // if registration failed, set loading to false, set error to true, set error message to message returned
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.payload;
+      })
+      .addCase(savePost.pending, (state, action) => {
+        // if saving is pending, set loading to true
+        state.loading = true;
+      })
+      .addCase(savePost.fulfilled, (state, action) => {
+        // if saving is successful, update the local storage profile item, update the authData store, set loading to false.
+        const profile = JSON.parse(localStorage.getItem("profile"));
+        profile.user.savedPosts.push(action.payload);
+        localStorage.setItem("profile", JSON.stringify(profile));
+        state.authData.user.savedPosts.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(savePost.rejected, (state, action) => {
+        // if saving fails, set loading to false, error to true and return error message
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.payload;
+      })
+      .addCase(unsavePost.pending, (state, action) => {
+        // if unsaving is pending, set loading to true
+        state.loading = true;
+      })
+      .addCase(unsavePost.fulfilled, (state, action) => {
+        // if unsaving is successful, update the local storage profile item, update the authData store, set loading to false.
+        const newSavedPosts = state.authData.user.savedPosts.filter(
+          (postId) => postId !== action.payload
+        );
+        const profile = JSON.parse(localStorage.getItem("profile"));
+        profile.user.savedPosts = newSavedPosts;
+        localStorage.setItem("profile", JSON.stringify(profile));
+        state.authData.user.savedPosts = newSavedPosts;
+        state.loading = false;
+      })
+      .addCase(unsavePost.rejected, (state, action) => {
+        // if unsaving fails, set loading to false, error to true and return error message
         state.loading = false;
         state.error = true;
         state.errorMessage = action.payload;
