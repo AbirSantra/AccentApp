@@ -2,9 +2,26 @@ import React from "react";
 import "./Profilepage.css";
 import coverImg from "../../images/cover.jpg";
 import profileImg from "../../images/profile1.jpg";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getUser } from "../../api/UserApi";
 // import { IoPersonAddSharp } from "react-icons/io5";
 
 const Profilepage = () => {
+  // Get the target user id from params
+  const { id } = useParams();
+
+  // Get the target user details
+  const [targetUser, setTargetUser] = useState({});
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUser(id);
+      setTargetUser(res.data);
+    };
+    fetchUser();
+  }, [id]);
+
   return (
     <div className="profilepage">
       <div className="profile__container container">
@@ -25,10 +42,12 @@ const Profilepage = () => {
         </div>
         {/* Profile Info Section */}
         <div className="profile--info--section">
-          <h1 className="profile--info--name">Abir Santra</h1>
-          <p className="profile--info--username">@drummingfreak</p>
+          <h1 className="profile--info--name">
+            {targetUser.firstname + " " + targetUser.lastname}
+          </h1>
+          <p className="profile--info--username">@{targetUser.username}</p>
           <p className="profile--info--headline">
-            MERN Stack Developer | Graphics Designer | Drummer | Gamer
+            {targetUser.bio ? `${targetUser.bio}` : "No bio added"}
           </p>
           {/* Buttons */}
           <div className="profile--actions">

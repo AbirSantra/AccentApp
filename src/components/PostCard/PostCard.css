@@ -77,6 +77,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   font-size: 1.2rem;
   transition: all 0.25s ease-in-out;
 }
@@ -84,6 +85,15 @@
 .post__options--icon:hover {
   color: var(--primary);
   transition: all 0.25s ease-in-out;
+}
+
+.post__options--icon--active {
+  color: var(--primary);
+}
+
+.post__options--icon--count {
+  font-weight: 300;
+  font-size: 0.8rem;
 }
 
 .post__options--icon:hover .tooltipcard {

@@ -102,7 +102,9 @@ const Homepage = () => {
           ) : (
             <div className="home__feed--posts">
               {postData.map((post) => {
-                return <PostCard data={post} key={post._id} />;
+                return (
+                  <PostCard data={post} key={post._id} currentUser={user._id} />
+                );
               })}
             </div>
           )}
