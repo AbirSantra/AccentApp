@@ -35,6 +35,7 @@ const Homepage = () => {
     } else if (timelineType === "newest") {
       dispatch(getNewestPosts());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timelineType]);
 
   return (

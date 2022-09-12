@@ -9,14 +9,12 @@ const Searchpage = () => {
         {/* Search Bar */}
         <div className="searchpage__searchbar--container">
           <h1 className="searchbar__heading">Accent - Search</h1>
-          <p className="searchbar__desc">
-            Find Creators or Posts across the globe
-          </p>
+          <p className="searchbar__desc">Find Creators across the globe</p>
           <div className="searchbar">
             <input
               type="text"
               className="searchbar__input"
-              placeholder="Search creators, posts or tags"
+              placeholder="Search creators"
             />
             <button className="searchbar__btn">
               <FaSearch />

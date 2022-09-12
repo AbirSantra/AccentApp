@@ -8,7 +8,6 @@ import {
   FaSearch,
   FaUser,
   FaPlus,
-  FaShoppingBag,
   FaStar,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,19 +55,19 @@ const Navbar = () => {
                 <p className="tooltiptext">Search</p>
               </span>
             </Link>
-            <Link to="/save" className="navbar__navlink">
+            <Link to="/saved" className="navbar__navlink">
               <FaStar size={26} />
               <span className="tooltipcard">
-                <p className="tooltiptext">Saves</p>
+                <p className="tooltiptext">Saved</p>
               </span>
             </Link>
 
-            <Link to="/marketplace" className="navbar__navlink">
+            {/* <Link to="/marketplace" className="navbar__navlink">
               <FaShoppingBag />
               <span className="tooltipcard">
                 <p className="tooltiptext">Marketplace</p>
               </span>
-            </Link>
+            </Link> */}
             <Link to={`/profile/${user.user._id}`} className="navbar__navlink">
               <FaUser />
               <span className="tooltipcard">

@@ -24,6 +24,18 @@ export const uploadPost = createAsyncThunk(
   }
 );
 
+export const getSavedPosts = createAsyncThunk(
+  "post/getSavedPosts",
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await PostApi.getSavedPosts(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
+);
+
 export const getFollowingPosts = createAsyncThunk(
   "post/getFollowingPosts",
   async (formData, { rejectWithValue }) => {
@@ -119,6 +131,20 @@ const PostSlice = createSlice({
         state.postsLoading = false;
       })
       .addCase(getPopularPosts.rejected, (state, action) => {
+        // if posts loading failed, set errors to true
+        state.loading = false;
+        state.postsLoadingError = action.payload;
+      })
+      .addCase(getSavedPosts.pending, (state, action) => {
+        // if posts are loading, set loading to true
+        state.postsLoading = true;
+      })
+      .addCase(getSavedPosts.fulfilled, (state, action) => {
+        // if posts have loaded, set post data to payload
+        state.postData = action.payload;
+        state.postsLoading = false;
+      })
+      .addCase(getSavedPosts.rejected, (state, action) => {
         // if posts loading failed, set errors to true
         state.loading = false;
         state.postsLoadingError = action.payload;

@@ -16,6 +16,9 @@ export const getNewestPosts = () => API.get("post/newest");
 // Api call for getting popular posts
 export const getPopularPosts = () => API.get("post/popular");
 
+// Api call for getting saved posts
+export const getSavedPosts = (id) => API.get(`/post/${id}/savedPosts`);
+
 // Api call for liking/unliking a post
 export const likePost = (id, userId) =>
   API.put(`post/${id}/like`, { userId: userId });
