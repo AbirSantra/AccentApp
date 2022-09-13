@@ -10,6 +10,8 @@ const initialState = {
   errorMessage: null,
   postsLoading: null,
   postsLoadingError: null,
+  postDeleting: null,
+  postDeletingError: null,
 };
 
 export const uploadPost = createAsyncThunk(
@@ -20,6 +22,18 @@ export const uploadPost = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async ({ id, userId }, { rejectWithValue }) => {
+    try {
+      await PostApi.deletePost(id, userId);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -148,6 +162,23 @@ const PostSlice = createSlice({
         // if posts loading failed, set errors to true
         state.loading = false;
         state.postsLoadingError = action.payload;
+      })
+      .addCase(deletePost.pending, (state, action) => {
+        // if post is deleting, set loading to true
+        state.postDeleting = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        // if post has been deleted, update the postData
+        const newPostData = state.postData.filter(
+          (post) => post._id !== action.payload
+        );
+        state.postData = newPostData;
+        state.postDeleting = false;
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        // if post deleting has failed set error message
+        state.postDeleting = false;
+        state.postDeletingError = action.payload;
       });
   },
 });

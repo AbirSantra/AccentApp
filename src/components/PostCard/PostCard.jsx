@@ -3,11 +3,13 @@ import "./PostCard.css";
 import userImg from "../../images/profile1.jpg";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { MdEdit, MdDelete } from "react-icons/md";
 import { useEffect } from "react";
 import { getUser } from "../../api/UserApi";
 import { likePost } from "../../api/PostApi";
 import { useDispatch, useSelector } from "react-redux";
 import { savePost, unsavePost } from "../../redux/AuthSlice";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 const PostCard = (post) => {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ const PostCard = (post) => {
   // To store the saved state of the post
   const [saved, setSaved] = useState(currentUser.savedPosts.includes(_id));
 
-  // Function to handle savepost
+  // Function to handle save post
   const handleSavePost = (e) => {
     e.preventDefault();
     if (saved === true) {
@@ -57,6 +59,24 @@ const PostCard = (post) => {
       dispatch(savePost({ id: _id, userId: currentUserId }));
     }
     setSaved((prev) => !prev);
+  };
+
+  // To store the options dropdown state
+  const [dropdown, setDropdown] = useState(false);
+
+  // Function to handle options
+  const handleOptions = (e) => {
+    e.preventDefault();
+    setDropdown((prev) => !prev);
+  };
+
+  // To store delete modal state
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  // Function to handle delete modal open/close
+  const handleDeleteModal = (e) => {
+    setDeleteModal((prev) => !prev);
+    setDropdown(false);
   };
 
   return (
@@ -100,15 +120,37 @@ const PostCard = (post) => {
             </span>
           </button>
           {currentUserId === userId && (
-            <a href="/" className="post__options--icon">
+            <button
+              onClick={handleOptions}
+              className="post__options--icon userOptions"
+            >
               <BiDotsHorizontalRounded />
-              <span className="tooltipcard">
-                <p className="tooltiptext">Options</p>
-              </span>
-            </a>
+            </button>
+          )}
+          {dropdown && (
+            <div className="post__options--dropdown">
+              <button className="post__options--option">
+                <MdEdit size={16} /> Edit Post
+              </button>
+              <button
+                className="post__options--option"
+                onClick={handleDeleteModal}
+              >
+                <MdDelete size={16} /> Delete Post
+              </button>
+            </div>
           )}
         </div>
       </div>
+      {deleteModal && (
+        <DeleteModal
+          postId={_id}
+          postUserId={userId}
+          imageUrl={image}
+          currentUserId={currentUserId}
+          setDeleteModal={setDeleteModal}
+        />
+      )}
     </div>
   );
 };

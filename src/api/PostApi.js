@@ -30,3 +30,6 @@ export const savePost = (id, userId) =>
 // Api call for unsaving a post
 export const unsavePost = (id, userId) =>
   API.put(`post/${id}/unsave`, { userId: userId });
+
+// Api call for deleting a post
+export const deletePost = (id, userId) => API.delete(`post/${id}/${userId}`);

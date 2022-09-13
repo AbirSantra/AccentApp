@@ -22,8 +22,6 @@ const Savedpage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser.savedPosts]);
 
-  console.log(postData);
-
   return (
     <div className="savedpage">
       <div className="savedpage__container container">
