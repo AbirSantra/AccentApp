@@ -12,6 +12,8 @@ const initialState = {
   postsLoadingError: null,
   postDeleting: null,
   postDeletingError: null,
+  postUpdating: null,
+  postUpdatingError: null,
 };
 
 export const uploadPost = createAsyncThunk(
@@ -32,6 +34,18 @@ export const deletePost = createAsyncThunk(
     try {
       await PostApi.deletePost(id, userId);
       return id;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  "post/editPost",
+  async ({ id, formdata }, { rejectWithValue }) => {
+    try {
+      await PostApi.updatePost(id, formdata);
+      return { id, formdata };
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message);
     }
@@ -179,6 +193,25 @@ const PostSlice = createSlice({
         // if post deleting has failed set error message
         state.postDeleting = false;
         state.postDeletingError = action.payload;
+      })
+      .addCase(updatePost.pending, (state, action) => {
+        // if post is updating, set loading to true
+        state.postUpdating = true;
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        // if post has been updated, update the postData
+        const newPostData = state.postData.map((post) =>
+          post._id === action.payload.id
+            ? { ...post, ...action.payload.formdata }
+            : post
+        );
+        state.postData = newPostData;
+        state.postUpdating = false;
+      })
+      .addCase(updatePost.rejected, (state, action) => {
+        // if post updating has failed set error message
+        state.postUpdating = false;
+        state.postUpdatingError = action.payload;
       });
   },
 });

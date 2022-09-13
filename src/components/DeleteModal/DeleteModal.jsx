@@ -34,6 +34,7 @@ const DeleteModal = ({
         .unwrap()
         .then(() => {
           deleteFromFirebase(imageUrl);
+          setDeleteModal(false);
         });
     } else {
       alert("Post Creator and Current User is not the same");

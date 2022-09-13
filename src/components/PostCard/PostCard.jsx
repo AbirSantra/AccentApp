@@ -10,6 +10,7 @@ import { likePost } from "../../api/PostApi";
 import { useDispatch, useSelector } from "react-redux";
 import { savePost, unsavePost } from "../../redux/AuthSlice";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import EditModal from "../EditModal/EditModal";
 
 const PostCard = (post) => {
   const dispatch = useDispatch();
@@ -73,9 +74,20 @@ const PostCard = (post) => {
   // To store delete modal state
   const [deleteModal, setDeleteModal] = useState(false);
 
-  // Function to handle delete modal open/close
+  // Function to toggle delete modal open/close
   const handleDeleteModal = (e) => {
+    e.preventDefault();
     setDeleteModal((prev) => !prev);
+    setDropdown(false);
+  };
+
+  // To store the edit modal state
+  const [editModal, setEditModal] = useState(false);
+
+  // Function to toggle edit modal open/close
+  const handleEditModal = (e) => {
+    e.preventDefault();
+    setEditModal((prev) => !prev);
     setDropdown(false);
   };
 
@@ -129,7 +141,10 @@ const PostCard = (post) => {
           )}
           {dropdown && (
             <div className="post__options--dropdown">
-              <button className="post__options--option">
+              <button
+                className="post__options--option"
+                onClick={handleEditModal}
+              >
                 <MdEdit size={16} /> Edit Post
               </button>
               <button
@@ -149,6 +164,13 @@ const PostCard = (post) => {
           imageUrl={image}
           currentUserId={currentUserId}
           setDeleteModal={setDeleteModal}
+        />
+      )}
+      {editModal && (
+        <EditModal
+          post={post.data}
+          currentUser={currentUser}
+          setEditModal={setEditModal}
         />
       )}
     </div>

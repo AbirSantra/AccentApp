@@ -33,3 +33,6 @@ export const unsavePost = (id, userId) =>
 
 // Api call for deleting a post
 export const deletePost = (id, userId) => API.delete(`post/${id}/${userId}`);
+
+// Api call for editing a post
+export const updatePost = (id, formData) => API.put(`post/${id}`, formData);
