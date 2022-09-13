@@ -172,7 +172,7 @@ const Uploadpage = () => {
             </div>
 
             {/* Tags */}
-            <div className="upload--form--input">
+            {/* <div className="upload--form--input">
               <label htmlFor="tags">Tags: </label>
               <input
                 type="text"
@@ -180,7 +180,7 @@ const Uploadpage = () => {
                 name="tags"
                 id="tags"
               />
-            </div>
+            </div> */}
 
             {/* Image Input */}
             <div className="upload--form--imageInput">
@@ -195,12 +195,12 @@ const Uploadpage = () => {
             </div>
 
             {/* Confirm */}
-            <div className="upload--form--confirm">
+            {/* <div className="upload--form--confirm">
               <input type="checkbox" name="confirm" id="confirm" />
               <label htmlFor="confirm">
                 I confirm that this post is my own creation.
               </label>
-            </div>
+            </div> */}
 
             {/* Error Message */}
             {imageErrorMessage && (
