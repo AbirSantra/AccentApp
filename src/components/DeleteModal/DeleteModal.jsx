@@ -44,9 +44,13 @@ const DeleteModal = ({
   return (
     <div className="deletemodal">
       <div className="deletemodal--container">
-        <p className="deletemodal--message">
-          Do you really want to delete this post? Post will be lost forever.
-        </p>
+        <div className="deletemodal--header">
+          <h1 className="deletemodal--form--heading">Delete Post</h1>
+          <p className="deletemodal--form--subheading">
+            Are you sure you want to delete this post? <br /> This action is
+            irreversible and your post will be lost forever.
+          </p>
+        </div>
         <div className="deletemodal--buttons">
           <button
             className="secondary-btn"
