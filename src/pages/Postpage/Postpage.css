@@ -1,0 +1,123 @@
+.postpage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.postpage--container {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.postpage--homebtn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary);
+}
+
+.postpage--homebtn button {
+  color: var(--primary);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--homebtn button:hover {
+  color: var(--primary-darker);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--postImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.55);
+  box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.55);
+}
+
+.postpage--buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+
+  flex-wrap: wrap;
+}
+
+.postpage--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1rem;
+  gap: 0.4rem;
+  color: var(--font-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--background);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--button:hover {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--user {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.postpage--user--image {
+  width: 3rem;
+  overflow: hidden;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 2px solid var(--primary);
+}
+
+.postpage--user--username {
+  font-size: 1.2rem;
+}
+
+.postpage--user--followbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--primary);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--user--followbtn:hover {
+  color: var(--primary-darker);
+  transition: all 0.25s ease-in-out;
+}
+
+.postpage--user--postTime {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--grey);
+  font-style: italic;
+}

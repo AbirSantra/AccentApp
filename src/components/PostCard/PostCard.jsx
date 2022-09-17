@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PostCard.css";
 import userImg from "../../images/profile1.jpg";
 import { FaHeart, FaStar } from "react-icons/fa";
@@ -14,6 +15,7 @@ import EditModal from "../EditModal/EditModal";
 
 const PostCard = (post) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Get the current user id
   const currentUser = useSelector((state) => state.auth.authData.user);
@@ -91,9 +93,14 @@ const PostCard = (post) => {
     setDropdown(false);
   };
 
+  // Function to navigate to post page
+  const handleOpenPost = () => {
+    navigate(`/post/${_id}`);
+  };
+
   return (
     <div className="postcard__container">
-      <div className="post__image">
+      <div className="post__image" onClick={handleOpenPost}>
         <img src={image} alt="postimg" />
       </div>
       <div className="post__details">

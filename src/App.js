@@ -8,6 +8,7 @@ import Authpage from "./pages/Authpage/Authpage";
 import { useSelector } from "react-redux";
 import Uploadpage from "./pages/Uploadpage/Uploadpage";
 import Savedpage from "./pages/Savedpage/Savedpage";
+import Postpage from "./pages/Postpage/Postpage";
 
 function App() {
   const user = useSelector((state) => state.auth.authData);
@@ -42,6 +43,10 @@ function App() {
         <Route
           path="/profile/:id"
           element={user ? <Profilepage /> : <Navigate to="../auth" />}
+        />
+        <Route
+          path="/post/:id"
+          element={user ? <Postpage /> : <Navigate to="../auth" />}
         />
         <Route
           path="/upload"

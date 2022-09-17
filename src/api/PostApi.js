@@ -7,6 +7,9 @@ const API = axios.create({ baseURL: "http://localhost:5000" });
 // Api call for creating a post
 export const uploadPost = (formData) => API.post("post/", formData);
 
+// Api call for getting a single post
+export const getPost = (id) => API.get(`post/${id}`);
+
 // Api call for getting following posts
 export const getFollowingPosts = (id) => API.get(`/post/${id}/followingPosts`);
 
