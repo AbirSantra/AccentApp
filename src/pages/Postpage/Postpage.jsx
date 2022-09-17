@@ -53,6 +53,9 @@ const Postpage = () => {
           <button onClick={handleHomeButton}>Back</button>
         </div>
 
+        {/* Post Title */}
+        <h1 className="postpage--title">{postDetails.title}</h1>
+
         {/* Post Image */}
         <div className="postpage--postImage">
           <img src={postDetails.image} alt="" />
@@ -73,9 +76,6 @@ const Postpage = () => {
             <AiFillDollarCircle size={18} /> Support creator
           </button>
         </div>
-
-        {/* Post Title */}
-        <h1 className="postpage--title">{postDetails.title}</h1>
 
         {/* Post User */}
         <div className="postpage--user">
