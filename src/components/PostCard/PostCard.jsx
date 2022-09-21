@@ -26,6 +26,7 @@ const PostCard = (post) => {
 
   // Get the post user details
   const [postUser, setPostUser] = useState({});
+
   useEffect(() => {
     const fetchUser = async () => {
       const res = await getUser(userId);

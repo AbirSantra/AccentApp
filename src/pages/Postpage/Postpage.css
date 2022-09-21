@@ -72,6 +72,10 @@
   transition: all 0.25s ease-in-out;
 }
 
+.postpage--button--active {
+  color: var(--primary);
+}
+
 .postpage--button:hover {
   border: 1px solid var(--primary);
   color: var(--primary);
@@ -115,9 +119,26 @@
 }
 
 .postpage--user--postTime {
-  margin-left: auto;
   font-size: 0.9rem;
   font-weight: 300;
   color: var(--grey);
   font-style: italic;
+}
+
+.postpage--stats {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.postpage--stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--grey);
 }
