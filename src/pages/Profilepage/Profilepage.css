@@ -8,6 +8,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .profile--images--section {
@@ -15,7 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 
 .profile--images--cover--container {
@@ -29,22 +30,17 @@
 }
 
 .profile--images--photo {
-  position: absolute;
-  top: 12rem;
-  left: 2rem;
   width: 8rem;
   border-radius: 50%;
-  outline: 0.5rem solid var(--background-light);
+  outline: 2px solid var(--primary);
 }
 
 .profile--info--section {
   width: 100%;
-  background-color: var(--background-light);
-  border-radius: 0 0 1rem 1rem;
-  padding: 5rem 2rem 2rem;
+  padding: 2rem 2rem;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -67,7 +63,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .profile--actions--btn {
@@ -98,11 +94,48 @@
 
 .profile--stat--num {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .profile--stat--label {
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--grey);
+}
+
+.profile--results {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile--results--posts {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  justify-content: start;
+  align-items: start;
+}
+
+.profile--results--followers {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  justify-content: start;
+  align-items: start;
+}
+
+.profile--results--followings {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  justify-content: start;
+  align-items: start;
 }
