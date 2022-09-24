@@ -22,9 +22,9 @@ const FollowingsCard = ({ userData }) => {
           <FollowingsCardProfile userId={user} key={user} />
         ))}
       </div>
-      <div className="followingsCard__seemore">
+      {/* <div className="followingsCard__seemore">
         <a href="/profile">See all {">"}</a>
-      </div>
+      </div> */}
     </div>
   );
 };

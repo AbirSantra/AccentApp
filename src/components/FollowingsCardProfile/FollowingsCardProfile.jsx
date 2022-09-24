@@ -5,8 +5,12 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { getUser } from "../../api/UserApi";
 import ProfileImg from "../../images/profile1.jpg";
 import "./FollowingsCardProfile.css";
+import userImagePlaceholder from "../../images/user image placeholder.jpg";
+import { useNavigate } from "react-router-dom";
 
 const FollowingsCardProfile = ({ userId }) => {
+  const navigate = useNavigate();
+
   // Get the user details using id
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -17,15 +21,20 @@ const FollowingsCardProfile = ({ userId }) => {
     fetchUser();
   }, [userId]);
 
+  // Function to redirect to user page
+  const handleClick = () => {
+    navigate(`/profile/${userId}`);
+  };
+
   return (
-    <div className="followingsCard__profile">
+    <div className="followingsCard__profile" onClick={handleClick}>
       <div className="followingsCard__profile--image">
-        <img src={ProfileImg} alt="profileimage" />
+        <img
+          src={user.profilePhoto ? user.profilePhoto : userImagePlaceholder}
+          alt="profileimage"
+        />
       </div>
       <p className="followingsCard__profile--name">{user.username}</p>
-      <a href="/" className="followingsCard__profile--options">
-        <BiDotsHorizontalRounded size={22} />
-      </a>
     </div>
   );
 };

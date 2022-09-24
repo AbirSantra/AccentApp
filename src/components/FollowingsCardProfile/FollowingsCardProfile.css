@@ -4,6 +4,7 @@
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+  cursor: pointer;
 }
 
 .followingsCard__profile--image {
@@ -26,14 +27,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.followingsCard__seemore {
-  width: 100%;
-  font-size: 0.8rem;
-  text-align: center;
-}
-
-.followingsCard__seemore a {
-  color: var(--primary);
 }
