@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PostCard.css";
-import userImg from "../../images/profile1.jpg";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { MdEdit, MdDelete } from "react-icons/md";
@@ -12,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { savePost, unsavePost } from "../../redux/AuthSlice";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import EditModal from "../EditModal/EditModal";
+import userImagePlaceholder from "../../images/user image placeholder.jpg";
 
 const PostCard = (post) => {
   const dispatch = useDispatch();
@@ -107,7 +107,14 @@ const PostCard = (post) => {
       <div className="post__details">
         <div className="post__userInfo">
           <div className="post__userImg">
-            <img src={userImg} alt="userimage" />
+            <img
+              src={
+                postUser.profilePhoto
+                  ? postUser.profilePhoto
+                  : userImagePlaceholder
+              }
+              alt="userimage"
+            />
           </div>
           <p className="post__username">{postUser.username}</p>
         </div>
