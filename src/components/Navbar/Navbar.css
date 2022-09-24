@@ -62,15 +62,51 @@
 }
 
 .navbar__profile--icon {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 2rem;
   border-radius: 50%;
-  overflow: hidden;
+}
+
+.navbar__profile--icon img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .navbar__uploadbtn {
   font-weight: 500;
+}
+
+.navbar__profile--dropdown {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  background-color: var(--background-light);
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 5;
+}
+
+.navbar__profile--option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--font-color);
+  transition: all 0.25s ease-in-out;
+}
+
+.navbar__profile--option:hover {
+  color: var(--primary-light);
+  transition: all 0.25s ease-in-out;
 }
