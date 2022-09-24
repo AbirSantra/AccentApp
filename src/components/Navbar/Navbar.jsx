@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import accentLogo from "../../images/accent text logo.png";
-import profileImg from "../../images/profile1.jpg";
+// import profileImg from "../../images/profile1.jpg";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import {
   // FaBookmark,
