@@ -139,7 +139,7 @@ const ProfileEditModal = ({ setEditModal }) => {
       <div className="profileeditmodal--container">
         {/* Form Header */}
         <div className="profileeditmodal--header">
-          <h1 className="profileeditmodal--form--heading">Edit Profile</h1>
+          <h1 className="profileeditmodal--form--heading">Profile Settings</h1>
         </div>
 
         {/* Form Body */}
