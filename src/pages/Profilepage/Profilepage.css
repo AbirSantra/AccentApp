@@ -13,10 +13,29 @@
 }
 
 .profile--images--section {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.profile--editbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: -4rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  background-color: var(--background-light);
+  outline: 1px solid var(--background-light);
+  transition: all 0.25s ease-in-out;
+}
+
+.profile--editbtn:hover {
+  outline: 1px solid var(--primary);
+  transition: all 0.25s ease-in-out;
 }
 
 .profile--images--cover--container {

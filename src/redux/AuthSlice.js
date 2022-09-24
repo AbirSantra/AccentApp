@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as AuthApi from "../api/AuthApi";
 import * as PostApi from "../api/PostApi";
+import * as UserApi from "../api/UserApi";
 
 const initialState = {
   authData: localStorage.getItem("profile")
@@ -11,6 +12,8 @@ const initialState = {
   loading: false,
   error: false,
   errorMessage: null,
+  userUpdating: null,
+  userUpdatingError: null,
 };
 
 //! Logging in User
@@ -40,6 +43,19 @@ export const signUp = createAsyncThunk(
     }
   }
   /* Call the api for the login with the form data. If login successful, return data. If login not successful, (e.g -> Username or email already exists) return the error message */
+);
+
+//! Updating a user
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async ({ id, formdata }, { rejectWithValue }) => {
+    try {
+      await UserApi.updateUser(id, formdata);
+      return { id, formdata };
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
 );
 
 //! Saving a post to user
@@ -115,6 +131,26 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = true;
         state.errorMessage = action.payload;
+      })
+      .addCase(updateUser.pending, (state, action) => {
+        // if the user is updating, set loading to true
+        state.userUpdating = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        // if user update successfull
+        state.userUpdating = false;
+        const newUserData = {
+          ...state.authData.user,
+          ...action.payload.formdata,
+        };
+        const profile = JSON.parse(localStorage.getItem("profile"));
+        profile.user = newUserData;
+        localStorage.setItem("profile", JSON.stringify(profile));
+        state.authData.user = newUserData;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.userUpdating = false;
+        state.userUpdatingError = action.payload;
       })
       .addCase(savePost.pending, (state, action) => {
         // if saving is pending, set loading to true

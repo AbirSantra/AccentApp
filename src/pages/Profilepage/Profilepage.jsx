@@ -13,6 +13,9 @@ import userImagePlaceholder from "../../images/user image placeholder.jpg";
 import { getUserPosts } from "../../api/PostApi";
 import PostCard from "../../components/PostCard/PostCard";
 import UserCard from "../../components/UserCard/UserCard";
+import { MdEdit } from "react-icons/md";
+import ProfileEditModal from "../../components/ProfileEditModal/ProfileEditModal";
+
 // import { IoPersonAddSharp } from "react-icons/io5";
 
 const Profilepage = () => {
@@ -43,6 +46,9 @@ const Profilepage = () => {
   // To store the state of the results
   const [results, setResults] = useState("posts");
 
+  // To store the state of the edit modal
+  const [editModal, setEditModal] = useState(false);
+
   // Get the target user details
   useEffect(() => {
     const fetchUser = async () => {
@@ -64,13 +70,6 @@ const Profilepage = () => {
       <div className="profile__container container">
         {/* Profile Images Section */}
         <div className="profile--images--section">
-          {/* <div className="profile--images--cover--container">
-            <img
-              src={coverImg}
-              alt="profile cover"
-              className="profile--images--cover"
-            />
-          </div> */}
           <img
             src={
               targetUser.profilePhoto
@@ -80,6 +79,14 @@ const Profilepage = () => {
             alt="profile display"
             className="profile--images--photo"
           />
+          {id === currentUser._id && (
+            <button
+              className="profile--editbtn"
+              onClick={() => setEditModal((prev) => !prev)}
+            >
+              <MdEdit size={20} />
+            </button>
+          )}
         </div>
         {/* Profile Info Section */}
         <div className="profile--info--section">
@@ -158,6 +165,8 @@ const Profilepage = () => {
           )}
         </div>
       </div>
+
+      {editModal && <ProfileEditModal setEditModal={setEditModal} />}
     </div>
   );
 };

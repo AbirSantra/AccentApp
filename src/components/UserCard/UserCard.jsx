@@ -17,11 +17,9 @@ const UserCard = ({ user }) => {
     currentUser.following.includes(user._id)
   );
 
-  const { username, firstname, lastname } = user;
-
   // Function to navigate to post page
   const handleUserPage = () => {
-    navigate(`/profile/${user._id}`, { replace: true });
+    navigate(`/profile/${user._id}`);
   };
 
   return (

@@ -12,3 +12,6 @@ export const getUserFollowers = (id) => API.get(`/user/${id}/followers`);
 
 // Api call for getting a users followers
 export const getUserFollowings = (id) => API.get(`/user/${id}/following`);
+
+// Api call for editing a user's details
+export const updateUser = (id, formData) => API.put(`/user/${id}`, formData);
