@@ -43,7 +43,7 @@
 }
 
 .home__feed--welcomeMsg {
-  font-weight: 400;
+  font-weight: 600;
   font-size: 2rem;
   color: var(--font-color);
 }

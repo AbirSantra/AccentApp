@@ -24,7 +24,9 @@ const Homepage = () => {
   );
 
   // To store the timeline type
-  const [timelineType, setTimelineType] = useState("following");
+  const [timelineType, setTimelineType] = useState(
+    user.following.length === 0 ? "popular" : "following"
+  );
 
   // To populate the posts on page load
   useEffect(() => {
