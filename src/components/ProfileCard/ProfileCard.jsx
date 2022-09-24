@@ -1,18 +1,21 @@
 import React from "react";
 import "./ProfileCard.css";
-import coverImg from "../../images/cover.jpg";
-import profileImg from "../../images/profile1.jpg";
+import UserImagePlaceholder from "../../images/user image placeholder.jpg";
 
 const ProfileCard = ({ userData }) => {
   return (
     <div className="profileCard__container">
       {/* DP and Banner */}
       <div className="profileCard__banner">
-        <div className="profileCard__coverImg">
-          <img src={coverImg} alt="profile cover" />
-        </div>
         <div className="profileCard__profileImg">
-          <img src={profileImg} alt="dp" />
+          <img
+            src={
+              userData.profilePhoto
+                ? userData.profilePhoto
+                : UserImagePlaceholder
+            }
+            alt="dp"
+          />
         </div>
       </div>
       {/* Name, Username, Headline */}
