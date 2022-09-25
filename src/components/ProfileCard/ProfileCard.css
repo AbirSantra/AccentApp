@@ -46,7 +46,7 @@
 .profileCard__username {
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--grey);
+  color: var(--primary);
 }
 
 .profileCard__bio {
