@@ -1,10 +1,11 @@
 import React from "react";
 import "./ProfileCard.css";
 import UserImagePlaceholder from "../../images/user image placeholder.jpg";
+import { Link } from "react-router-dom";
 
 const ProfileCard = ({ userData }) => {
   return (
-    <div className="profileCard__container">
+    <Link to={`/profile/${userData._id}`} className="profileCard__container">
       {/* DP and Banner */}
       <div className="profileCard__banner">
         <div className="profileCard__profileImg">
@@ -39,7 +40,7 @@ const ProfileCard = ({ userData }) => {
           <p className="stat__label">Followings</p>
         </section>
       </div>
-    </div>
+    </Link>
   );
 };
 
