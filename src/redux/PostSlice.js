@@ -14,6 +14,8 @@ const initialState = {
   postDeletingError: null,
   postUpdating: null,
   postUpdatingError: null,
+  postCommenting: null,
+  postCommentingError: null,
 };
 
 export const uploadPost = createAsyncThunk(
@@ -45,6 +47,18 @@ export const updatePost = createAsyncThunk(
   async ({ id, formdata }, { rejectWithValue }) => {
     try {
       await PostApi.updatePost(id, formdata);
+      return { id, formdata };
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
+);
+
+export const commentPost = createAsyncThunk(
+  "post/commentPost",
+  async ({ id, formdata }, { rejectWithValue }) => {
+    try {
+      await PostApi.commentPost(id, formdata);
       return { id, formdata };
     } catch (error) {
       return rejectWithValue(error?.response?.data?.message);
@@ -212,6 +226,25 @@ const PostSlice = createSlice({
         // if post updating has failed set error message
         state.postUpdating = false;
         state.postUpdatingError = action.payload;
+      })
+      .addCase(commentPost.pending, (state, action) => {
+        // if comment is loading, set loading to true
+        state.postCommenting = true;
+      })
+      .addCase(commentPost.fulfilled, (state, action) => {
+        // if comment is successful, update the postData
+        const newPostData = state.postData.map((post) =>
+          post._id === action.payload.id
+            ? { ...post, ...action.payload.formdata }
+            : post
+        );
+        state.postData = newPostData;
+        state.postCommenting = false;
+      })
+      .addCase(commentPost.rejected, (state, action) => {
+        // if comment is rejected, set error message
+        state.postCommenting = false;
+        state.postCommentingError = action.payload;
       });
   },
 });

@@ -14,6 +14,8 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, likePost } from "../../api/PostApi";
 import { savePost, unsavePost } from "../../redux/AuthSlice";
+import Comment from "../../components/Comment/Comment";
+import { commentPost } from "../../redux/PostSlice";
 
 const Postpage = () => {
   const navigate = useNavigate();
@@ -50,6 +52,12 @@ const Postpage = () => {
 
   // To store the saved post state
   const [saved, setSaved] = useState(currentUser.savedPosts.includes(id));
+
+  // To store the comment state
+  const [comment, setComment] = useState("");
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
 
   // Set the post and user details as soon as the page loads
   useEffect(() => {
@@ -88,6 +96,20 @@ const Postpage = () => {
       dispatch(savePost({ id: id, userId: currentUser._id }));
     }
     setSaved((prev) => !prev);
+  };
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const newComment = {
+      currentUserId: currentUser._id,
+      text: comment,
+    };
+    dispatch(commentPost({ id: id, formdata: newComment }))
+      .unwrap()
+      .then(() => {
+        postDetails.comments.push(newComment);
+        setComment("");
+      });
   };
 
   return (
@@ -142,7 +164,11 @@ const Postpage = () => {
           {/* User Image */}
           <div className="postpage--user--image">
             <img
-              src={postUser.image ? postUser.image : userImagePlaceholder}
+              src={
+                postUser.profilePhoto
+                  ? postUser.profilePhoto
+                  : userImagePlaceholder
+              }
               alt=""
             />
           </div>
@@ -171,7 +197,52 @@ const Postpage = () => {
 
         {/* Post Description */}
         <div className="postpage--desc">{postDetails.desc}</div>
+
         {/* Comments Section */}
+        <div className="postpage--comments">
+          <h2 className="postpage--comments--header">Comments</h2>
+
+          {/* Comment form */}
+          <div className="postpage--comments--input">
+            <div className="postpage--comments--input--user">
+              <img
+                src={
+                  postUser.profilePhoto
+                    ? postUser.profilePhoto
+                    : userImagePlaceholder
+                }
+                alt=""
+              />
+            </div>
+            <div className="postpage--comments--input--form">
+              <textarea
+                placeholder="Add a comment. Don't forget to be nice!"
+                className="postpage--comments--input--field"
+                name="comment"
+                rows="auto"
+                id="comment"
+                value={comment}
+                onChange={handleCommentChange}
+              />
+              <button
+                className="primary-btn postpage--comments--btn"
+                onClick={handleCommentSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+
+          {/* Other Comments */}
+          <div className="postpage--comments--cards">
+            {postDetails.comments
+              .slice(0)
+              .reverse()
+              .map((comment, index) => (
+                <Comment key={index} data={comment} />
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

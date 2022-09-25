@@ -29,6 +29,10 @@ export const getSavedPosts = (id) => API.get(`/post/${id}/savedPosts`);
 export const likePost = (id, userId) =>
   API.put(`post/${id}/like`, { userId: userId });
 
+// Api call for commenting on a post
+export const commentPost = (id, formdata) =>
+  API.put(`post/${id}/comment`, formdata);
+
 // Api call for unsaving a post
 export const savePost = (id, userId) =>
   API.put(`post/${id}/save`, { userId: userId });
