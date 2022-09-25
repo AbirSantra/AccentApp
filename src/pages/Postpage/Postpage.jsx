@@ -2,18 +2,23 @@ import React from "react";
 import "./Postpage.css";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getUser } from "../../api/UserApi";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { FaHeart, FaStar } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaCheck } from "react-icons/fa";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { AiFillDollarCircle } from "react-icons/ai";
 import userImagePlaceholder from "../../images/user image placeholder.jpg";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost, likePost } from "../../api/PostApi";
-import { savePost, unsavePost } from "../../redux/AuthSlice";
+import {
+  followUser,
+  savePost,
+  unfollowUser,
+  unsavePost,
+} from "../../redux/AuthSlice";
 import Comment from "../../components/Comment/Comment";
 import { commentPost } from "../../redux/PostSlice";
 
@@ -53,6 +58,11 @@ const Postpage = () => {
   // To store the saved post state
   const [saved, setSaved] = useState(currentUser.savedPosts.includes(id));
 
+  // To store the followed state
+  const [followed, setFollowed] = useState(
+    currentUser.following.includes(postUser._id)
+  );
+
   // To store the comment state
   const [comment, setComment] = useState("");
   const handleCommentChange = (e) => {
@@ -68,6 +78,7 @@ const Postpage = () => {
       setPostUser(userData.data);
       setLiked(postData.data.likes.includes(currentUser._id));
       setLikes(postData.data.likes.length);
+      setFollowed(currentUser.following.includes(postData.data.userId));
     };
     fetchDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,6 +123,23 @@ const Postpage = () => {
       });
   };
 
+  // Function to handle follow/unfollow
+  const handleFollow = (e) => {
+    e.preventDefault();
+    if (followed === true) {
+      dispatch(
+        unfollowUser({ id: postUser._id, currentUserId: currentUser._id })
+      );
+    } else if (followed === false) {
+      dispatch(
+        followUser({ id: postUser._id, currentUserId: currentUser._id })
+      );
+    }
+    setFollowed((prev) => !prev);
+  };
+
+  console.log(currentUser._id);
+
   return (
     <div className="postpage">
       <div className="container postpage--container">
@@ -151,9 +179,9 @@ const Postpage = () => {
           >
             <FaStar size={16} /> {saved ? "Saved" : "Add to Saved"}
           </button>
-          <button className="postpage--button">
+          <a href="#comment" className="postpage--button">
             <BsFillChatDotsFill size={16} /> Add a Comment
-          </button>
+          </a>
           <button className="postpage--button">
             <AiFillDollarCircle size={18} /> Support creator
           </button>
@@ -174,12 +202,27 @@ const Postpage = () => {
           </div>
 
           {/* Username */}
-          <p className="postpage--user--username">{postUser.username}</p>
+          <Link
+            to={`/profile/${postUser._id}`}
+            className="postpage--user--username"
+          >
+            {postUser.username}
+          </Link>
 
           {/* Follow Button */}
-          <button className="postpage--user--followbtn">
-            <FaPlus size={10} /> Follow
-          </button>
+          {postDetails.userId !== currentUser._id && (
+            <div onClick={handleFollow}>
+              {followed ? (
+                <button className="postpage--user--followbtn">
+                  <FaCheck size={10} /> Following
+                </button>
+              ) : (
+                <button className="postpage--user--followbtn">
+                  <FaPlus size={10} /> Follow
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Post Stats */}
@@ -200,15 +243,17 @@ const Postpage = () => {
 
         {/* Comments Section */}
         <div className="postpage--comments">
-          <h2 className="postpage--comments--header">Comments</h2>
+          <h2 className="postpage--comments--header">
+            Comments ({postDetails.comments.length})
+          </h2>
 
           {/* Comment form */}
-          <div className="postpage--comments--input">
+          <div className="postpage--comments--input" id="comment">
             <div className="postpage--comments--input--user">
               <img
                 src={
-                  postUser.profilePhoto
-                    ? postUser.profilePhoto
+                  currentUser.profilePhoto
+                    ? currentUser.profilePhoto
                     : userImagePlaceholder
                 }
                 alt=""

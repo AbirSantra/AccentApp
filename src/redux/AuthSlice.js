@@ -85,6 +85,32 @@ export const unsavePost = createAsyncThunk(
   }
 );
 
+//! Following a user
+export const followUser = createAsyncThunk(
+  "auth/followUser",
+  async ({ id, currentUserId }, { rejectWithValue }) => {
+    try {
+      await UserApi.followUser(id, currentUserId);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message);
+    }
+  }
+);
+
+//! Unfollowing a user
+export const unfollowUser = createAsyncThunk(
+  "auth/unfollowUser",
+  async ({ id, currentUserId }, { rejectWithValue }) => {
+    try {
+      await UserApi.unfollowUser(id, currentUserId);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
@@ -187,6 +213,37 @@ const authSlice = createSlice({
       })
       .addCase(unsavePost.rejected, (state, action) => {
         // if unsaving fails, set loading to false, error to true and return error message
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.payload;
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        // if following is successful
+        const profile = JSON.parse(localStorage.getItem("profile"));
+        profile.user.following.push(action.payload);
+        localStorage.setItem("profile", JSON.stringify(profile));
+        state.authData.user.following.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(followUser.rejected, (state, action) => {
+        // if following fails, set loading to false, error to true and return error message
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.payload;
+      })
+      .addCase(unfollowUser.fulfilled, (state, action) => {
+        // if unfollowing is successful, update the local storage profile item, update the authData store, set loading to false.
+        const newFollowing = state.authData.user.following.filter(
+          (userId) => userId !== action.payload
+        );
+        const profile = JSON.parse(localStorage.getItem("profile"));
+        profile.user.following = newFollowing;
+        localStorage.setItem("profile", JSON.stringify(profile));
+        state.authData.user.following = newFollowing;
+        state.loading = false;
+      })
+      .addCase(unfollowUser.rejected, (state, action) => {
+        // if unfollowing fails, set loading to false, error to true and return error message
         state.loading = false;
         state.error = true;
         state.errorMessage = action.payload;

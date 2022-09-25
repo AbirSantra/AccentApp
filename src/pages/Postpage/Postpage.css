@@ -104,6 +104,10 @@
   font-size: 1.2rem;
 }
 
+.postpage--user--username:hover {
+  text-decoration: underline;
+}
+
 .postpage--user--followbtn {
   display: flex;
   justify-content: center;

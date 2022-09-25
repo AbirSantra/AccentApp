@@ -8,17 +8,20 @@ import {
   getUserFollowers,
   getUserFollowings,
 } from "../../api/UserApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userImagePlaceholder from "../../images/user image placeholder.jpg";
 import { getUserPosts } from "../../api/PostApi";
 import PostCard from "../../components/PostCard/PostCard";
 import UserCard from "../../components/UserCard/UserCard";
 import { MdEdit } from "react-icons/md";
 import ProfileEditModal from "../../components/ProfileEditModal/ProfileEditModal";
+import { followUser, unfollowUser } from "../../redux/AuthSlice";
 
 // import { IoPersonAddSharp } from "react-icons/io5";
 
 const Profilepage = () => {
+  const dispatch = useDispatch();
+
   // Get the current user from the store
   const currentUser = useSelector((state) => state.auth.authData.user);
 
@@ -49,6 +52,9 @@ const Profilepage = () => {
   // To store the state of the edit modal
   const [editModal, setEditModal] = useState(false);
 
+  // To store the followed state of the user
+  const [followed, setFollowed] = useState(currentUser.following.includes(id));
+
   // Get the target user details
   useEffect(() => {
     const fetchUser = async () => {
@@ -64,6 +70,17 @@ const Profilepage = () => {
     fetchUser();
     setResults("posts");
   }, [id]);
+
+  // Function to handle follow/unfollow
+  const handleFollow = (e) => {
+    e.preventDefault();
+    if (followed === true) {
+      dispatch(unfollowUser({ id: id, currentUserId: currentUser._id }));
+    } else if (followed === false) {
+      dispatch(followUser({ id: id, currentUserId: currentUser._id }));
+    }
+    setFollowed((prev) => !prev);
+  };
 
   return (
     <div className="profilepage">
@@ -121,10 +138,17 @@ const Profilepage = () => {
           </div>
 
           {/* Buttons */}
-          {!currentUser.following.includes(id) && currentUser._id !== id && (
+          {currentUser._id !== id && (
             <div className="profile--actions">
-              <button className="primary-btn profile--actions--btn">
-                Follow
+              <button
+                className={
+                  followed
+                    ? "secondary-btn profile--actions--btn"
+                    : "primary-btn profile--actions--btn"
+                }
+                onClick={handleFollow}
+              >
+                {followed ? "Unfollow" : "Follow"}
               </button>
               {/* <button className="secondary-btn profile--actions--btn">
                 Message

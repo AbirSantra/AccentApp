@@ -15,3 +15,11 @@ export const getUserFollowings = (id) => API.get(`/user/${id}/following`);
 
 // Api call for editing a user's details
 export const updateUser = (id, formData) => API.put(`/user/${id}`, formData);
+
+// Api call for following a user
+export const followUser = (id, currentUserId) =>
+  API.put(`/user/${id}/follow`, { currentUserId: currentUserId });
+
+// Api call for unfollowing a user
+export const unfollowUser = (id, currentUserId) =>
+  API.put(`/user/${id}/unfollow`, { currentUserId: currentUserId });
