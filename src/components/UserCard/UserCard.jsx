@@ -1,13 +1,15 @@
 import React from "react";
 import "./UserCard.css";
 import UserImagePlaceholder from "../../images/user image placeholder.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaPlus, FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { followUser, unfollowUser } from "../../redux/AuthSlice";
 
 const UserCard = ({ user }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Get the current user from the store
   const currentUser = useSelector((state) => state.auth.authData.user);
@@ -20,6 +22,17 @@ const UserCard = ({ user }) => {
   // Function to navigate to post page
   const handleUserPage = () => {
     navigate(`/profile/${user._id}`);
+  };
+
+  // Function to handle follow/unfollow
+  const handleFollow = (e) => {
+    e.preventDefault();
+    if (followed === true) {
+      dispatch(unfollowUser({ id: user._id, currentUserId: currentUser._id }));
+    } else if (followed === false) {
+      dispatch(followUser({ id: user._id, currentUserId: currentUser._id }));
+    }
+    setFollowed((prev) => !prev);
   };
 
   return (
@@ -45,11 +58,19 @@ const UserCard = ({ user }) => {
         {/* Bottom Section */}
         <div className="usercard--action">
           {followed ? (
-            <button className="usercard--followbtn usercard--followbtn--active">
+            <button
+              className="usercard--followbtn usercard--followbtn--active"
+              onClick={handleFollow}
+              disabled={user._id === currentUser._id}
+            >
               <FaCheck /> Following
             </button>
           ) : (
-            <button className="usercard--followbtn">
+            <button
+              className="usercard--followbtn"
+              onClick={handleFollow}
+              disabled={user._id === currentUser._id}
+            >
               <FaPlus /> Follow
             </button>
           )}

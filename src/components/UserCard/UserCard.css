@@ -85,6 +85,10 @@
   font-size: 0.9rem;
 }
 
+.usercard--followbtn:disabled {
+  cursor: not-allowed;
+}
+
 .usercard--followbtn--active {
   color: var(--primary);
 }
