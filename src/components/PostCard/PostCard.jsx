@@ -102,6 +102,7 @@ const PostCard = (post) => {
   return (
     <div className="postcard__container">
       <div className="post__image" onClick={handleOpenPost}>
+        <div className="post--image--overlay">&copy; {postUser.username}</div>
         <img src={image} alt="postimg" />
       </div>
       <div className="post__details">
@@ -129,9 +130,9 @@ const PostCard = (post) => {
           >
             <FaHeart />
             <p className="post__options--icon--count">{likesCount}</p>
-            <span className="tooltipcard">
+            {/* <span className="tooltipcard">
               <p className="tooltiptext">Like</p>
-            </span>
+            </span> */}
           </button>
           <button
             onClick={handleSavePost}
@@ -142,9 +143,9 @@ const PostCard = (post) => {
             }
           >
             <FaStar size={22} />
-            <span className="tooltipcard">
+            {/* <span className="tooltipcard">
               <p className="tooltiptext">Save</p>
-            </span>
+            </span> */}
           </button>
           {currentUserId === userId && (
             <button

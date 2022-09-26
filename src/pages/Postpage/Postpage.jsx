@@ -154,6 +154,9 @@ const Postpage = () => {
 
         {/* Post Image */}
         <div className="postpage--postImage">
+          <div className="postpage--postImage--overlay">
+            &copy; {postUser.username}
+          </div>
           <img src={postDetails.image} alt={postDetails.image} />
         </div>
 
