@@ -1,81 +1,81 @@
 .profileCard__container {
-  width: 100%;
-  background-color: var(--background-light);
-  padding: 2rem 1rem;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
+	width: 100%;
+	background-color: var(--background-light);
+	padding: 2rem 1rem;
+	border-radius: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .profileCard__banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .profileCard__profileImg {
-  width: 5rem;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  overflow: hidden;
-  outline: 2px solid var(--primary);
+	width: 4rem;
+	height: 4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	overflow: hidden;
+	outline: 2px solid var(--primary);
 }
 
 /* Profile Info Section */
 .profileCard__info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
 }
 
 .profileCard__name {
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--font-color);
+	font-size: 1.3rem;
+	font-weight: 400;
+	color: var(--font-color);
 }
 
 .profileCard__username {
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--primary);
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: var(--primary);
 }
 
 .profileCard__bio {
-  font-size: 0.75rem;
-  color: var(--grey);
-  margin-top: 1rem;
+	font-size: 0.8rem;
+	color: var(--grey);
+	margin-top: 1rem;
 }
 
 /* Profile Stat Section */
 .profileCard__stats {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
 }
 
 .profileCard__stat {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: var(--font-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: var(--font-color);
 }
 
 .stat__num {
-  font-size: 1rem;
+	font-size: 0.9rem;
 }
 
 .stat__label {
-  font-size: 0.625rem;
-  color: var(--grey);
+	font-size: 0.7rem;
+	color: var(--grey);
 }
