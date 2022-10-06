@@ -40,7 +40,7 @@ const Navbar = () => {
 	// Function to redirect to settings page
 	const handleSettings = (e) => {
 		e.preventDefault();
-		navigate(`profile/${user.user._id}`);
+		navigate(`settings`);
 	};
 
 	// Function to direct to UploadPost page

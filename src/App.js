@@ -10,6 +10,7 @@ import Uploadpage from "./pages/Uploadpage/Uploadpage";
 import Savedpage from "./pages/Savedpage/Savedpage";
 import Postpage from "./pages/Postpage/Postpage";
 import NotFoundpage from "./pages/NotFoundpage/NotFoundpage";
+import Settingspage from "./pages/Settingspage/Settingspage";
 
 function App() {
 	const user = useSelector((state) => state.auth.authData);
@@ -52,6 +53,10 @@ function App() {
 				<Route
 					path="/upload"
 					element={user ? <Uploadpage /> : <Navigate to="../auth" />}
+				/>
+				<Route
+					path="/settings"
+					element={user ? <Settingspage /> : <Navigate to="../auth" />}
 				/>
 				<Route path="*" element={<NotFoundpage />} />
 			</Routes>
