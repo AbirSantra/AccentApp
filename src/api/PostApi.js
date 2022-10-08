@@ -4,6 +4,16 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
+API.interceptors.request.use((req) => {
+	if (localStorage.getItem("profile")) {
+		req.headers.Authorization = `Bearer ${
+			JSON.parse(localStorage.getItem("profile")).token
+		}`;
+	}
+
+	return req;
+});
+
 // Api call for creating a post
 export const uploadPost = (formData) => API.post("post/", formData);
 
@@ -27,19 +37,19 @@ export const getSavedPosts = (id) => API.get(`/post/${id}/savedPosts`);
 
 // Api call for liking/unliking a post
 export const likePost = (id, userId) =>
-  API.put(`post/${id}/like`, { userId: userId });
+	API.put(`post/${id}/like`, { userId: userId });
 
 // Api call for commenting on a post
 export const commentPost = (id, formdata) =>
-  API.put(`post/${id}/comment`, formdata);
+	API.put(`post/${id}/comment`, formdata);
 
 // Api call for unsaving a post
 export const savePost = (id, userId) =>
-  API.put(`post/${id}/save`, { userId: userId });
+	API.put(`post/${id}/save`, { userId: userId });
 
 // Api call for unsaving a post
 export const unsavePost = (id, userId) =>
-  API.put(`post/${id}/unsave`, { userId: userId });
+	API.put(`post/${id}/unsave`, { userId: userId });
 
 // Api call for deleting a post
 export const deletePost = (id, userId) => API.delete(`post/${id}/${userId}`);

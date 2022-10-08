@@ -16,6 +16,8 @@ import { logOut } from "../../redux/AuthSlice";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UserImagePlaceholder from "../../images/user image placeholder.jpg";
+import decode from "jwt-decode";
+import { useEffect } from "react";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -48,6 +50,18 @@ const Navbar = () => {
 		e.preventDefault();
 		navigate("../upload");
 	};
+
+	// To check for token and logout user if expired
+	useEffect(() => {
+		const token = user?.token;
+
+		if (token) {
+			const decodedToken = decode(token);
+			if (decodedToken.exp * 1000 < new Date().getTime()) {
+				handleLogOut();
+			}
+		}
+	});
 
 	return (
 		<nav className="navbar">
