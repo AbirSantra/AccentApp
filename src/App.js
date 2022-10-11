@@ -11,6 +11,7 @@ import Savedpage from "./pages/Savedpage/Savedpage";
 import Postpage from "./pages/Postpage/Postpage";
 import NotFoundpage from "./pages/NotFoundpage/NotFoundpage";
 import Settingspage from "./pages/Settingspage/Settingspage";
+import Donationpage from "./pages/Donationpage/Donationpage";
 
 function App() {
 	const user = useSelector((state) => state.auth.authData);
@@ -57,6 +58,10 @@ function App() {
 				<Route
 					path="/settings"
 					element={user ? <Settingspage /> : <Navigate to="../auth" />}
+				/>
+				<Route
+					path="/donation"
+					element={user ? <Donationpage /> : <Navigate to="../auth" />}
 				/>
 				<Route path="*" element={<NotFoundpage />} />
 			</Routes>
