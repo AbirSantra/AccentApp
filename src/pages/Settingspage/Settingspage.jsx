@@ -40,6 +40,14 @@ const Settingspage = () => {
 		setBio(e.target.value);
 	};
 
+	// To store the state of the donationLink
+	const [donationLink, setDonationLink] = useState(
+		currentUser?.donationLink || ""
+	);
+	const donationLinkChange = (e) => {
+		setDonationLink(e.target.value);
+	};
+
 	// To store the state of the profilephoto
 	const [profilephoto, setProfilePhoto] = useState(
 		currentUser?.profilePhoto || ""
@@ -82,6 +90,7 @@ const Settingspage = () => {
 				firstname: firstname,
 				lastname: lastname,
 				bio: bio,
+				donationLink: donationLink,
 			};
 			dispatch(updateUser({ id: currentUser._id, formdata: updatedUser }))
 				.unwrap()
@@ -118,6 +127,7 @@ const Settingspage = () => {
 							firstname: firstname,
 							lastname: lastname,
 							bio: bio,
+							donationLink: donationLink,
 							profilePhoto: downloadURL,
 						};
 						dispatch(updateUser({ id: currentUser._id, formdata: updatedUser }))
@@ -222,6 +232,19 @@ const Settingspage = () => {
 							id="bio"
 							value={bio}
 							onChange={bioChange}
+						/>
+					</div>
+
+					{/* Donation Link */}
+					<div className="settings--form--input">
+						<label htmlFor="donationLink">Donation Page Link: </label>
+						<input
+							type="text"
+							placeholder="Add link to your donation page"
+							name="donationLink"
+							id="donationLink"
+							value={donationLink}
+							onChange={donationLinkChange}
 						/>
 					</div>
 

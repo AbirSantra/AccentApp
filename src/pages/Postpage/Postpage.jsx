@@ -21,6 +21,7 @@ import {
 } from "../../redux/AuthSlice";
 import Comment from "../../components/Comment/Comment";
 import { commentPost } from "../../redux/PostSlice";
+import DonateModal from "../../components/DonateModal/DonateModal";
 
 const Postpage = () => {
 	const navigate = useNavigate();
@@ -69,6 +70,9 @@ const Postpage = () => {
 		setComment(e.target.value);
 	};
 
+	// To store the donate modal state
+	const [donateModal, setDonateModal] = useState(false);
+
 	// Set the post and user details as soon as the page loads
 	useEffect(() => {
 		const fetchDetails = async () => {
@@ -83,6 +87,11 @@ const Postpage = () => {
 		fetchDetails();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
+
+	// Function to toggle donate modal
+	const toggleDonateModal = () => {
+		setDonateModal((prev) => !prev);
+	};
 
 	// Function to navigate back to homepage
 	const handleHomeButton = (e) => {
@@ -139,12 +148,6 @@ const Postpage = () => {
 		setFollowed((prev) => !prev);
 	};
 
-	// Function to handle donation
-	const handleDonation = (e) => {
-		e.preventDefault();
-		alert("This feature is coming soon!");
-	};
-
 	return (
 		<div className="postpage">
 			<div className="container postpage--container">
@@ -190,7 +193,7 @@ const Postpage = () => {
 					<a href="#comment" className="postpage--button">
 						<BsFillChatDotsFill size={16} /> Add a Comment
 					</a>
-					<button className="postpage--button" onClick={handleDonation}>
+					<button className="postpage--button" onClick={toggleDonateModal}>
 						<AiFillDollarCircle size={18} /> Support creator
 					</button>
 				</div>
@@ -302,6 +305,9 @@ const Postpage = () => {
 					</div>
 				</div>
 			</div>
+			{donateModal && (
+				<DonateModal setDonateModal={setDonateModal} user={postUser} />
+			)}
 		</div>
 	);
 };

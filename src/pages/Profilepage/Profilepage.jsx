@@ -1,6 +1,6 @@
 import React from "react";
 import "./Profilepage.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
@@ -160,6 +160,19 @@ const Profilepage = () => {
 						</div>
 					)}
 				</div>
+
+				{/* Donation Warning */}
+				{(!currentUser.donationLink || currentUser.donationLink === "") && (
+					<div className="profile--donation--warning">
+						<p className="donation--warning--message">
+							⚠️ Seems like your donation page is not setup yet!{" "}
+							<Link to="/donation" className="donation--warning--message--link">
+								Click here
+							</Link>{" "}
+							to learn more
+						</p>
+					</div>
+				)}
 
 				{/* Profile Results Section */}
 				<div className="profile--results">
