@@ -76,6 +76,7 @@ img {
 	/* max-width: 1440px; */
 	margin: 0 auto;
 	padding: 0 4rem;
+	margin-bottom: 6rem;
 }
 
 .primary-btn {
@@ -154,4 +155,16 @@ img {
 	border-width: 10px;
 	border-style: solid;
 	border-color: transparent transparent var(--background-light) transparent;
+}
+
+@media screen and (max-width: 1440px) {
+	.container {
+		padding: 0 2rem;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.container {
+		padding: 0 1rem;
+	}
 }

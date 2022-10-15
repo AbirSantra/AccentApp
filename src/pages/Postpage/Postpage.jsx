@@ -188,13 +188,43 @@ const Postpage = () => {
 						}
 						onClick={handleSavePost}
 					>
-						<FaStar size={16} /> {saved ? "Saved" : "Add to Saved"}
+						<FaStar size={18} /> {saved ? "Saved" : "Add to Saved"}
 					</button>
 					<a href="#comment" className="postpage--button">
 						<BsFillChatDotsFill size={16} /> Add a Comment
 					</a>
 					<button className="postpage--button" onClick={toggleDonateModal}>
 						<AiFillDollarCircle size={18} /> Support creator
+					</button>
+				</div>
+
+				{/* Post Buttons Mobile */}
+				<div className="postpage--buttons postpage--buttons--mobile">
+					<button
+						className={
+							liked
+								? "postpage--button postpage--button--active"
+								: "postpage--button"
+						}
+						onClick={handleLike}
+					>
+						<FaHeart size={24} />
+					</button>
+					<button
+						className={
+							saved
+								? "postpage--button postpage--button--active"
+								: "postpage--button"
+						}
+						onClick={handleSavePost}
+					>
+						<FaStar size={26} />
+					</button>
+					<a href="#comment" className="postpage--button">
+						<BsFillChatDotsFill size={24} />
+					</a>
+					<button className="postpage--button" onClick={toggleDonateModal}>
+						<AiFillDollarCircle size={26} />
 					</button>
 				</div>
 
@@ -258,13 +288,13 @@ const Postpage = () => {
 				</p>
 
 				{/* Comments Section */}
-				<div className="postpage--comments">
+				<div className="postpage--comments" id="comment">
 					<h2 className="postpage--comments--header">
 						Comments ({postDetails.comments.length})
 					</h2>
 
 					{/* Comment form */}
-					<div className="postpage--comments--input" id="comment">
+					<div className="postpage--comments--input">
 						<div className="postpage--comments--input--user">
 							<img
 								src={

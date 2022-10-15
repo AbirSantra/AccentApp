@@ -54,7 +54,7 @@ const Searchpage = () => {
 				<div className="searchpage__searchbar--container">
 					<h1 className="searchbar__heading">Accent - Search</h1>
 					<p className="searchbar__desc">Find Creators across the globe</p>
-					<div className="searchbar">
+					<form className="searchbar" onSubmit={handleSearch}>
 						<input
 							type="text"
 							className="searchbar__input"
@@ -62,10 +62,10 @@ const Searchpage = () => {
 							value={query}
 							onChange={handleQueryChange}
 						/>
-						<button className="searchbar__btn" onClick={handleSearch}>
+						<button className="searchbar__btn" type="submit">
 							<FaSearch />
 						</button>
-					</div>
+					</form>
 				</div>
 				{/* Error */}
 				{error && <p>{error}</p>}

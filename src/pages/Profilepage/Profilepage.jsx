@@ -178,7 +178,7 @@ const Profilepage = () => {
 				<div className="profile--results">
 					{/* Posts Results */}
 					{results === "posts" && (
-						<div className="profile--results--posts">
+						<div className="profile--results--items">
 							{posts.map((post) => (
 								<PostCard
 									data={post}
@@ -190,7 +190,7 @@ const Profilepage = () => {
 					)}
 					{/* Followers Results */}
 					{results === "followers" && (
-						<div className="profile--results--followers">
+						<div className="profile--results--items">
 							{followers.map((follower) => (
 								<UserCard user={follower} key={follower._id} />
 							))}
@@ -198,7 +198,7 @@ const Profilepage = () => {
 					)}
 					{/* Followings Results */}
 					{results === "followings" && (
-						<div className="profile--results--followings">
+						<div className="profile--results--items">
 							{followings.map((following) => (
 								<UserCard user={following} key={following._id} />
 							))}

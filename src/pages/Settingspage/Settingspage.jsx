@@ -144,7 +144,7 @@ const Settingspage = () => {
 
 	return (
 		<div className="settings">
-			<div className="settings--container">
+			<div className="container settings--container">
 				{/* Form Header */}
 				<div className="settings--header">
 					<h1 className="settings--form--heading">Profile Settings</h1>
@@ -188,6 +188,7 @@ const Settingspage = () => {
 							placeholder="Your username"
 							name="username"
 							id="username"
+							maxLength="20"
 							value={username}
 							onChange={usernameChange}
 							required

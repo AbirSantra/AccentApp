@@ -9,7 +9,7 @@
 	align-items: center;
 	flex-direction: column;
 	margin-top: 2rem;
-	margin-bottom: 2rem;
+	margin-bottom: 6rem;
 }
 
 .profile--images--section {
@@ -75,6 +75,7 @@
 
 .profile--info--headline {
 	color: var(--grey);
+	text-align: center;
 }
 
 .profile--actions {
@@ -129,6 +130,7 @@
 
 .donation--warning--message--link {
 	color: var(--primary);
+	text-align: center;
 }
 
 .profile--results {
@@ -139,7 +141,7 @@
 	align-items: center;
 }
 
-.profile--results--posts {
+.profile--results--items {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -148,22 +150,18 @@
 	align-items: start;
 }
 
-.profile--results--followers {
-	width: 100%;
-
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 1.5rem;
-	justify-content: start;
-	align-items: start;
+@media screen and (max-width: 1440px) {
+	.profile--results--items {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
-
-.profile--results--followings {
-	width: 100%;
-
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 1.5rem;
-	justify-content: start;
-	align-items: start;
+@media screen and (max-width: 1200px) {
+	.profile--results--items {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media screen and (max-width: 768px) {
+	.profile--results--items {
+		grid-template-columns: 1fr;
+	}
 }

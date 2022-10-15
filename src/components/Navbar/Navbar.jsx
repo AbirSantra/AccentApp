@@ -169,11 +169,68 @@ const Navbar = () => {
 							className="primary-btn navbar__uploadbtn"
 							onClick={handleNewPost}
 						>
-							<FaPlus /> New Post
+							<FaPlus /> Upload
+						</button>
+						<button
+							className="primary-btn navbar__uploadbtn--mobile"
+							onClick={handleNewPost}
+						>
+							<FaPlus />
 						</button>
 					</div>
 				)}
 			</div>
+			{user && (
+				<div className="navbar__navlinks--mobile">
+					<NavLink
+						to="/home"
+						className={({ isActive }) =>
+							isActive
+								? "navbar__navlink navbar__navlink--active"
+								: "navbar__navlink"
+						}
+					>
+						<AiFillHome size={28} />
+					</NavLink>
+					<NavLink
+						to="/search"
+						className={({ isActive }) =>
+							isActive
+								? "navbar__navlink navbar__navlink--active"
+								: "navbar__navlink"
+						}
+					>
+						<FaSearch />
+					</NavLink>
+					<NavLink
+						to="/saved"
+						className={({ isActive }) =>
+							isActive
+								? "navbar__navlink navbar__navlink--active"
+								: "navbar__navlink"
+						}
+					>
+						<FaStar size={26} />
+					</NavLink>
+
+					{/* <Link to="/marketplace" className="navbar__navlink">
+              <FaShoppingBag />
+              <span className="tooltipcard">
+                <p className="tooltiptext">Marketplace</p>
+              </span>
+            </Link> */}
+					<NavLink
+						to={`/profile/${user.user._id}`}
+						className={({ isActive }) =>
+							isActive
+								? "navbar__navlink navbar__navlink--active"
+								: "navbar__navlink"
+						}
+					>
+						<FaUser />
+					</NavLink>
+				</div>
+			)}
 		</nav>
 	);
 };

@@ -71,8 +71,11 @@
 	justify-content: flex-start;
 	align-items: center;
 	gap: 1rem;
-
 	flex-wrap: wrap;
+}
+
+.postpage--buttons--mobile {
+	display: none;
 }
 
 .postpage--button {
@@ -236,4 +239,18 @@
 	align-items: flex-start;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.postpage--title {
+		font-size: 1.5rem;
+	}
+
+	.postpage--buttons {
+		display: none;
+	}
+
+	.postpage--buttons--mobile {
+		display: flex;
+	}
 }
