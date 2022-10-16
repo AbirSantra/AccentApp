@@ -96,6 +96,7 @@ const Homepage = () => {
 							</button>
 						</div>
 					</div>
+					{postData.length === 0 && <p>No posts available</p>}
 					{postsLoading ? (
 						postsLoadingError ? (
 							<p>{postsLoadingError}</p>
