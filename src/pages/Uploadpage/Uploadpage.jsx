@@ -54,6 +54,16 @@ const Uploadpage = () => {
 	// State to store the image uploading progress
 	const [progress, setProgress] = useState(null);
 
+	// State to store the copyright check
+	const [confirm, setConfirm] = useState(false);
+	const handleConfirm = (e) => {
+		if (e.target.checked) {
+			setConfirm(true);
+		} else {
+			setConfirm(false);
+		}
+	};
+
 	// Function to upload image and save post to database
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
@@ -198,12 +208,17 @@ const Uploadpage = () => {
 						</div>
 
 						{/* Confirm */}
-						{/* <div className="upload--form--confirm">
-              <input type="checkbox" name="confirm" id="confirm" />
-              <label htmlFor="confirm">
-                I confirm that this post is my own creation.
-              </label>
-            </div> */}
+						<div className="upload--form--confirm">
+							<input
+								type="checkbox"
+								name="confirm"
+								id="confirm"
+								onChange={handleConfirm}
+							/>
+							<label htmlFor="confirm">
+								I confirm that this post is my own creation.
+							</label>
+						</div>
 
 						{/* Error Message */}
 						{imageErrorMessage && (
@@ -218,18 +233,18 @@ const Uploadpage = () => {
 						{/* Submit Button */}
 						<button
 							className={
-								progress || loading || btnDisabled
+								progress || loading || btnDisabled || !confirm
 									? "primary-btn upload--submit--btn btn-disabled"
 									: "primary-btn upload--submit--btn "
 							}
 							type="submit"
-							disabled={progress || loading || btnDisabled}
+							disabled={progress || loading || btnDisabled || !confirm}
 						>
 							{progress !== null && progress < 100
 								? `Uploading Image ${progress}%`
 								: progress === 100 || loading
 								? "Saving your Post"
-								: "Submit Post"}
+								: "Upload"}
 						</button>
 					</form>
 				</div>
