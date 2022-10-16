@@ -40,6 +40,9 @@ const Authpage = () => {
 	// state to store password and confirm password validity
 	const [confirmPassword, setConfirmPassword] = useState(true);
 
+	// state to store the slow server announcement
+	const [announcement, setAnnouncement] = useState(false);
+
 	//function to toggle show password state
 	const toggleShowPassword = () => {
 		setShowpass((prev) => !prev);
@@ -65,7 +68,7 @@ const Authpage = () => {
 	//function to handle form submission
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-
+		setAnnouncement(true);
 		if (isSignup) {
 			if (data.password === data.confirmpassword) {
 				dispatch(signUp(data))
@@ -195,6 +198,14 @@ const Authpage = () => {
 							: "Sign In"}
 					</button>
 				</form>
+				{/* Annoucement */}
+				{announcement && (
+					<p className="auth--annoucement">
+						⚠️ Since this project is hosted on a free server, it is shutdown
+						after 15mins of inactivity. So the first load may take upto 30
+						seconds. Please refresh if it is taking too long.
+					</p>
+				)}
 			</div>
 		</div>
 	);

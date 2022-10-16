@@ -103,6 +103,12 @@
 	background-color: var(--primary-darkest);
 }
 
+.auth--annoucement {
+	font-size: 0.9rem;
+	font-weight: 300;
+	color: var(--grey-light);
+}
+
 @media screen and (max-width: 800px) {
 	.authpage--container {
 		padding: 4rem 3rem;
