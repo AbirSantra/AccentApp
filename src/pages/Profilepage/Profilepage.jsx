@@ -162,17 +162,21 @@ const Profilepage = () => {
 				</div>
 
 				{/* Donation Warning */}
-				{(!currentUser.donationLink || currentUser.donationLink === "") && (
-					<div className="profile--donation--warning">
-						<p className="donation--warning--message">
-							⚠️ Seems like your donation page is not setup yet!{" "}
-							<Link to="/donation" className="donation--warning--message--link">
-								Click here
-							</Link>{" "}
-							to learn more
-						</p>
-					</div>
-				)}
+				{currentUser._id === id &&
+					(!currentUser.donationLink || currentUser.donationLink === "") && (
+						<div className="profile--donation--warning">
+							<p className="donation--warning--message">
+								⚠️ Seems like your donation page is not setup yet!{" "}
+								<Link
+									to="/donation"
+									className="donation--warning--message--link"
+								>
+									Click here
+								</Link>{" "}
+								to learn more
+							</p>
+						</div>
+					)}
 
 				{/* Profile Results Section */}
 				<div className="profile--results">

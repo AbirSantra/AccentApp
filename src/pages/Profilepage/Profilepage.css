@@ -126,11 +126,11 @@
 .profile--donation--warning {
 	font-weight: 300;
 	color: var(--grey);
+	text-align: center;
 }
 
 .donation--warning--message--link {
 	color: var(--primary);
-	text-align: center;
 }
 
 .profile--results {
