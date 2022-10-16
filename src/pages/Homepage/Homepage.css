@@ -27,10 +27,11 @@
 
 /* Home Feed Section */
 .home__feed--section {
+	min-height: calc(100vh - 12rem);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	gap: 1.5rem;
 	min-width: 0;
@@ -54,6 +55,11 @@
 
 .home__feed--welcomeMsg span {
 	color: var(--primary);
+}
+
+.home__feed--noposts {
+	text-align: center;
+	margin: auto;
 }
 
 .home__feed--links {

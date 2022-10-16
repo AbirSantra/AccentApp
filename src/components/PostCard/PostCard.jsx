@@ -22,7 +22,7 @@ const PostCard = (post) => {
 	const currentUserId = currentUser._id;
 
 	// Get the post details from props
-	const { _id, image, userId, likes } = post.data;
+	const { _id, image, userId, likes, title } = post.data;
 
 	// Get the post user details
 	const [postUser, setPostUser] = useState({});
@@ -102,6 +102,7 @@ const PostCard = (post) => {
 	return (
 		<div className="postcard__container">
 			<div className="post__image" onClick={handleOpenPost}>
+				<div className="post--title">{title}</div>
 				<div className="post--image--overlay">&copy; {postUser.username}</div>
 				<img src={image} alt="postimg" />
 			</div>

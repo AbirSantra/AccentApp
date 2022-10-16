@@ -113,12 +113,19 @@
 
 .postpage--user--image {
 	width: 3rem;
+	height: 3rem;
 	overflow: hidden;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	outline: 2px solid var(--primary);
+}
+
+.postpage--user--image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .postpage--user--username {
@@ -200,11 +207,18 @@
 
 .postpage--comments--input--user {
 	width: 2rem;
+	height: 2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
 	overflow: hidden;
+}
+
+.postpage--comments--input--user img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .postpage--comments--input--field {

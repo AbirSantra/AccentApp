@@ -50,6 +50,8 @@
 
 .profile--images--photo {
 	width: 8rem;
+	height: 8rem;
+	object-fit: cover;
 	border-radius: 50%;
 	outline: 2px solid var(--primary);
 }

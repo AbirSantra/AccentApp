@@ -70,6 +70,9 @@ const Searchpage = () => {
 				{/* Error */}
 				{error && <p>{error}</p>}
 
+				{/* No Results */}
+				{!results && <p className="searchpage--noresults">No results found!</p>}
+
 				{/* Results Section */}
 				{results && (
 					<div className="searchpage__results">

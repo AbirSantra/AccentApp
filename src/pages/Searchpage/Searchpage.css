@@ -76,6 +76,10 @@
 	transition: all 0.25s ease-in-out;
 }
 
+.searchpage--noresults {
+	text-align: center;
+}
+
 .searchpage__results {
 	width: 100%;
 	display: grid;
