@@ -34,21 +34,23 @@
 	gap: 1rem;
 	padding: 1rem;
 	cursor: pointer;
-	min-width: 0px;
 }
 
 .usercard--profile--image {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 64px;
+	width: 4rem;
+	height: 4rem;
+	min-width: 4rem;
 	overflow: hidden;
 	border-radius: 50%;
-	/* outline: 2px solid var(--primary); */
+	outline: 2px solid var(--primary);
 }
 
 .usercard--profile--image img {
 	width: 100%;
+	height: 100%;
 	object-fit: cover;
 }
 
