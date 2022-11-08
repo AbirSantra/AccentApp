@@ -132,7 +132,7 @@ Accent is a platform for creators. One can be a painter, a digital artist, a pho
    - Replace the baseurl in the 'api' files with your localhost
    - Replace the proxy in package.json
    - Start the server using `npm start`
-5. For backend: - Replace mongodb URI with your mongodb atlas URI - Replace JWT secret with your own secret - Start the server using `npm run dev'
+5. For backend: - Replace mongodb URI with your mongodb atlas URI - Replace JWT secret with your own secret - Start the server using `npm run dev`
    <br>
    <br>
 
