@@ -66,8 +66,11 @@ Accent is a platform for creators. One can be a painter, a digital artist, a pho
     ![navbar](./public/navbar.png)
 
   - Post Card - Each post card has the post image, the username and buttons for liking and saving the post. The edit option is also available for the post's created by the user themselves.
+
     - Other creator's Accent
+
       ![postcard](./public/postcard.png)
+
     - Current user's Accent with update and delete options when clicked
       ![userpostcard](./public/userpostcard.png)
     - Edit Modal
