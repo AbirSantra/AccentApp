@@ -73,7 +73,11 @@ const Authpage = () => {
 			if (data.password === data.confirmpassword) {
 				dispatch(signUp(data))
 					.unwrap()
-					.then(() => navigate("../home", { replace: true }));
+					.then(() =>
+						dispatch(logIn(data))
+							.unwrap()
+							.then(() => navigate("../home", { replace: true }))
+					);
 			} else {
 				setConfirmPassword(false);
 			}
