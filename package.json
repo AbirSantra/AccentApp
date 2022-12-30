@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://accent-server.onrender.com/",
+  "proxy": "https://lonely-ring-bull.cyclic.app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@stripe/react-stripe-js": "^1.12.0",
