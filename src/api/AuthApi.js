@@ -9,7 +9,7 @@ const API = axios.create({
 });
 
 // Api call for user login
-export const logIn = (formData) => API.post("auth/login", formData);
+export const logIn = (formData) => API.post("/auth/login", formData);
 
 // Api call for user registration
-export const signUp = (formData) => API.post("auth/register", formData);
+export const signUp = (formData) => API.post("/auth/register", formData);
