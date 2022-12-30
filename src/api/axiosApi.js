@@ -8,7 +8,7 @@ export const setAxiosStore = (store) => {
 };
 
 const API = axios.create({
-	baseURL: "https://lonely-ring-bull.cyclic.app/",
+	baseURL: "https://lonely-ring-bull.cyclic.app",
 	headers: { "Content-Type": "application/json" },
 	withCredentials: true,
 });

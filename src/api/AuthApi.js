@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const API = axios.create({
-	baseURL: "https://lonely-ring-bull.cyclic.app/",
+	baseURL: "https://lonely-ring-bull.cyclic.app",
 	withCredentials: true,
 	headers: { "Content-Type": "application/json" },
 });
