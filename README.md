@@ -116,7 +116,7 @@ Accent is a platform for creators. One can be a painter, a digital artist, a pho
 6. Firebase Storage - CDN for Accent images
 7. JWT - Authentication
 8. Netlify - Frontend App Hosting
-9. Render - Backend Server Hosting
+9. Cyclic - Backend Server Hosting
 
 ---
 
@@ -132,8 +132,11 @@ Accent is a platform for creators. One can be a painter, a digital artist, a pho
    - Replace the baseurl in the 'api' files with your localhost
    - Replace the proxy in package.json
    - Start the server using `npm start`
-5. For backend: - Replace mongodb URI with your mongodb atlas URI - Replace JWT secret with your own secret - Start the server using `npm run dev`
-   <br>
-   <br>
+5. For backend:
+   - Replace mongodb URI with your mongodb atlas URI
+   - Replace JWT secret with your own secret
+   - Start the server using `npm run dev`
+     <br>
+     <br>
 
 ## Give me a star if you liked this project ⭐❤️
