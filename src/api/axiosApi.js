@@ -8,7 +8,7 @@ export const setAxiosStore = (store) => {
 };
 
 const API = axios.create({
-	baseURL: "https://lonely-ring-bull.cyclic.app",
+	baseURL: "https://accentserver.cyclic.app",
 	headers: { "Content-Type": "application/json" },
 	withCredentials: true,
 });
@@ -30,45 +30,32 @@ API.interceptors.response.use(
 	(res) => {
 		return res;
 	},
-	async (err) => {
-		// Get the original query
-		const originalQuery = err.config;
+	async (error) => {
+		const {
+			config,
+			response: { status },
+		} = error;
+		const originalRequest = config;
 
-		if (err.response) {
-			// Access Token has expired
-			if (err.response.status === 403 && !originalQuery._retry) {
-				// Set retry to true
-				originalQuery._retry = true;
+		if (status === 403 && !originalRequest._retry) {
+			originalRequest._retry = true;
 
-				try {
-					// Get new access token
-					const { data } = await API.get("/auth/refresh", {
-						withCredentials: true,
-					});
-
-					// If new access token was returned by server
-					if (data) {
-						// Set the new authData
-						localStorage.setItem("profile", JSON.stringify(data));
-						// Update the header of the original query
-						originalQuery.headers[
-							"Authorization"
-						] = `Bearer ${data.accessToken}`;
-						// Retry the orignal query
-						return API(originalQuery);
-					}
-				} catch (error) {
-					// Refresh Token was expired or invalid. So logout.
-					if (error.response.status === 401 && error.response.data) {
-						axiosStore.dispatch(logOut());
-						return Promise.reject(error);
-					}
-					return Promise.reject(error);
-				}
-			}
+			return axios
+				.get("/auth/refresh", { withCredentials: true })
+				.then(({ data }) => {
+					localStorage.setItem("profile", JSON.stringify(data));
+					originalRequest.headers[
+						"Authorization"
+					] = `Bearer ${data.accessToken}`;
+					return API(originalRequest);
+				})
+				.catch(() => {
+					axiosStore.dispatch(logOut());
+					window.location.reload();
+				});
 		}
 
-		return Promise.reject(err);
+		return Promise.reject(error);
 	}
 );
 
