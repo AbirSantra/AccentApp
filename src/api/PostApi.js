@@ -31,6 +31,9 @@ export const likePost = (id, userId) =>
 export const commentPost = (id, formdata) =>
 	API.put(`/post/${id}/comment`, formdata);
 
+// Api call for getting all the comments on a post
+export const getPostComments = (id) => API.get(`/post/${id}/comments`);
+
 // Api call for unsaving a post
 export const savePost = (id, userId) =>
 	API.put(`/post/${id}/save`, { userId: userId });
