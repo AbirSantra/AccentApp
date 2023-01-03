@@ -4,8 +4,6 @@ import "./PostCard.css";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { useEffect } from "react";
-import { getUser } from "../../api/UserApi";
 import { likePost } from "../../api/PostApi";
 import { useDispatch, useSelector } from "react-redux";
 import { savePost, unsavePost } from "../../redux/AuthSlice";
@@ -24,16 +22,8 @@ const PostCard = (post) => {
 	// Get the post details from props
 	const { _id, image, userId, likes, title } = post.data;
 
-	// Get the post user details
-	const [postUser, setPostUser] = useState({});
-
-	useEffect(() => {
-		const fetchUser = async () => {
-			const res = await getUser(userId);
-			setPostUser(res.data);
-		};
-		fetchUser();
-	}, [userId]);
+	// To store the post user details
+	const postUser = userId;
 
 	// To store the liked state of the post
 	const [liked, setLiked] = useState(likes.includes(currentUserId));
@@ -150,7 +140,7 @@ const PostCard = (post) => {
               <p className="tooltiptext">Save</p>
             </span> */}
 					</button>
-					{currentUserId === userId && (
+					{currentUserId === postUser._id && (
 						<button
 							onClick={handleOptions}
 							className="post__options--icon userOptions"
@@ -179,7 +169,7 @@ const PostCard = (post) => {
 			{deleteModal && (
 				<DeleteModal
 					postId={_id}
-					postUserId={userId}
+					postUserId={userId._id}
 					imageUrl={image}
 					currentUserId={currentUserId}
 					setDeleteModal={setDeleteModal}
