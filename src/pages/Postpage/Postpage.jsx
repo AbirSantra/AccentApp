@@ -3,7 +3,6 @@ import "./Postpage.css";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getUser } from "../../api/UserApi";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { FaPlus, FaCheck } from "react-icons/fa";
@@ -12,7 +11,7 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import userImagePlaceholder from "../../images/user image placeholder.jpg";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost, likePost } from "../../api/PostApi";
+import { getPost, getPostComments, likePost } from "../../api/PostApi";
 import {
 	followUser,
 	savePost,
@@ -48,6 +47,9 @@ const Postpage = () => {
 		following: [],
 	});
 
+	// To store the post comments
+	const [postComments, setPostComments] = useState([]);
+
 	// To store the liked stated of the post
 	const [liked, setLiked] = useState(
 		postDetails.likes.includes(currentUser._id)
@@ -77,9 +79,10 @@ const Postpage = () => {
 	useEffect(() => {
 		const fetchDetails = async () => {
 			const postData = await getPost(id);
-			const userData = await getUser(postData.data.userId);
+			const postComments = await getPostComments(id);
 			setPostDetails(postData.data);
-			setPostUser(userData.data);
+			setPostUser(postData.data.userId);
+			setPostComments(postComments.data);
 			setLiked(postData.data.likes.includes(currentUser._id));
 			setLikes(postData.data.likes.length);
 			setFollowed(currentUser.following.includes(postData.data.userId));
@@ -128,7 +131,10 @@ const Postpage = () => {
 		dispatch(commentPost({ id: id, formdata: newComment }))
 			.unwrap()
 			.then(() => {
-				postDetails.comments.push(newComment);
+				postComments.push({
+					text: comment,
+					user: currentUser,
+				});
 				setComment("");
 			});
 	};
@@ -161,12 +167,19 @@ const Postpage = () => {
 				<h1 className="postpage--title">{postDetails.title}</h1>
 
 				{/* Post Image */}
-				<div className="postpage--postImage">
-					<div className="postpage--postImage--overlay">
-						&copy; {postUser.username}
+				{postDetails.image ? (
+					<div className="postpage--postImage">
+						<div className="postpage--postImage--overlay">
+							&copy; {postUser.username}
+						</div>
+
+						<img src={postDetails.image} alt={postDetails.image} />
 					</div>
-					<img src={postDetails.image} alt={postDetails.image} />
-				</div>
+				) : (
+					<div className="postpage--postImage--placeholder">
+						Loading Image...
+					</div>
+				)}
 
 				{/* Post Buttons */}
 				<div className="postpage--buttons">
@@ -326,7 +339,7 @@ const Postpage = () => {
 
 					{/* Other Comments */}
 					<div className="postpage--comments--cards">
-						{postDetails.comments
+						{postComments
 							.slice(0)
 							.reverse()
 							.map((comment, index) => (
