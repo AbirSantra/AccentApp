@@ -46,7 +46,7 @@ const Homepage = () => {
 				{/* Profile Section */}
 				<div className="home__profile--section">
 					<ProfileCard userData={user} />
-					<FollowingsCard userData={user.following} />
+					<FollowingsCard userId={user._id} />
 				</div>
 				{/* Feed Section */}
 				<div className="home__feed--section">

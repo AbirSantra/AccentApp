@@ -14,10 +14,7 @@ import { getUserPosts } from "../../api/PostApi";
 import PostCard from "../../components/PostCard/PostCard";
 import UserCard from "../../components/UserCard/UserCard";
 import { MdEdit } from "react-icons/md";
-// import ProfileEditModal from "../../components/ProfileEditModal/ProfileEditModal";
 import { followUser, unfollowUser } from "../../redux/AuthSlice";
-
-// import { IoPersonAddSharp } from "react-icons/io5";
 
 const Profilepage = () => {
 	const dispatch = useDispatch();
@@ -210,8 +207,6 @@ const Profilepage = () => {
 					)}
 				</div>
 			</div>
-
-			{/* {editModal && <ProfileEditModal setEditModal={setEditModal} />} */}
 		</div>
 	);
 };

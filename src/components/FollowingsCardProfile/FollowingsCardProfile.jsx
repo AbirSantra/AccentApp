@@ -1,27 +1,16 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { getUser } from "../../api/UserApi";
 import "./FollowingsCardProfile.css";
 import userImagePlaceholder from "../../images/user image placeholder.jpg";
 import { useNavigate } from "react-router-dom";
 
-const FollowingsCardProfile = ({ userId }) => {
+const FollowingsCardProfile = ({ userData }) => {
 	const navigate = useNavigate();
 
-	// Get the user details using id
-	const [user, setUser] = useState({});
-	useEffect(() => {
-		const fetchUser = async () => {
-			const res = await getUser(userId);
-			setUser(res.data);
-		};
-		fetchUser();
-	}, [userId]);
+	const user = userData;
 
 	// Function to redirect to user page
 	const handleClick = () => {
-		navigate(`/profile/${userId}`);
+		navigate(`/profile/${user._id}`);
 	};
 
 	return (

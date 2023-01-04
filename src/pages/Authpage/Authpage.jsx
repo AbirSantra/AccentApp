@@ -205,9 +205,8 @@ const Authpage = () => {
 				{/* Annoucement */}
 				{announcement && (
 					<p className="auth--annoucement">
-						⚠️ Since this project is hosted on a free server, it is shutdown
-						after 15mins of inactivity. So the first load may take upto 30
-						seconds. Please refresh if it is taking too long.
+						⚠️ Since this project is hosted on a free server, it may take upto
+						30 seconds to load. Please refresh if it is taking too long.
 					</p>
 				)}
 			</div>
